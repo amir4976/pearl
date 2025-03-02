@@ -12,7 +12,7 @@ function RegisterFrom() {
             نام کاربری <span className="text-red-500">*</span>
           </label>
           <input
-            id="userName"
+            id="userName"    
             className="p-2 rounded-full w-full bg-transparent border border-gray-600"
             type="text"
           />
