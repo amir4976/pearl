@@ -1,17 +1,38 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import React from "react";
+const Danablack = localFont({
+  src: "../../public/fonts/DanaFaNum-Black.woff",
+  variable: "--font-dana-black",
+  weight: "100 900",
+});
+const Danabold = localFont({
+  src: "../../public/fonts/DanaFaNum-Bold (1).woff",
+  variable: "--font-dana-Bold",
+  weight: "100 900",
+});
+const Danademi = localFont({
+  src: "../../public/fonts/DanaFaNum-DemiBold.woff",
+  variable: "--font-dana-demi",
+  weight: "100 900",
+});
+const Danaextra = localFont({
+  src: "../../public/fonts/DanaFaNum-ExtraBold.woff",
+  variable: "--font-dana-extra-Bold",
+  weight: "100 900",
+});
+const Danamed = localFont({
+  src: "../../public/fonts/DanaFaNum-Medium.woff",
+  variable: "--font-dana-med",
+  weight: "100 900",
+});
+const Danareq = localFont({
+  src: "../../public/fonts/DanaFaNum-Regular (1).woff",
+  variable: "--font-dana-req",
+  weight: "100 900",
+});
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +47,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`
+          ${Danablack.variable} 
+          ${Danabold.variable} 
+          ${Danademi.variable} 
+          ${Danaextra.variable} 
+          ${Danamed.variable} 
+          ${Danareq.variable} 
+           
+          antialiased`}
       >
         {children}
       </body>

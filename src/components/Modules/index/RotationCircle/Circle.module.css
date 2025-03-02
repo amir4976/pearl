@@ -1,0 +1,30 @@
+.animateIn{
+    animation: animateInTr 0.7s  ;
+
+}
+
+@keyframes animateInTr {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+        transform: scale(0.5);
+        transform-origin: bottom;
+    }100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        transform: scale(1);
+        transform-origin: bottom;
+    }
+}
+/* CSS for smooth fade-in and fade-out */
+.fadeOut {
+    opacity: 0 !important; /* Make element invisible */
+    transition: opacity 0.5s ease-out; /* Smooth fade-out transition */
+  }
+  
+  /* Optionally, add any other animations here if needed */
+  .animateIn {
+    opacity: 1; /* Initially visible */
+    transition: opacity 0.5s ease-in; /* Smooth fade-in transition */
+  }
+  

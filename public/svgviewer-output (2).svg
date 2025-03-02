@@ -1,0 +1,12 @@
+      <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="textcircle" d="M250,50a200,200 0 1,1 -0.1,0" />
+        </defs>
+        <text font-size="40" color="#f3d098" fill="currentColor">
+          <textPath href="#textcircle" startOffset="0">
+            مشـــــاهـــــده دمــــوهـــــا ـــ مشـــــاهـــــده دمــــوهـــــا
+            ـــ مشـــــاهـــــده دمــــوهـــــا ـــ مشـــــاهـــــده
+            دمــــوهـــــا ـــ
+          </textPath>
+        </text>
+      </svg>
