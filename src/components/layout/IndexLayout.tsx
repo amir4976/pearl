@@ -6,7 +6,7 @@ import Footer from '../Modules/global/Footer/Footer'
 
 function IndexLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className='max-w-8xl mx-auto bg-before realtive'>
+    <div className='max-w-8xl mx-auto  realtive'>
         <Navbar/>
         {children}
         <Footer/>

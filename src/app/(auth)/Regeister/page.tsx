@@ -14,7 +14,7 @@ function Register() {
     setStatuse("login");
   };
   return (
-    <IndexLayout>
+    <>
       <BradCramp />
       <div className="w-full h-fit flex justify-center  md:px-24 max-md:px-10  py-20">
         <div className="flex w-full  h-fit max-md:flex-col max-md:gap-5 ">
@@ -43,7 +43,7 @@ function Register() {
           </div>
         </div>
       </div>
-    </IndexLayout>
+    </>
   );
 }
 

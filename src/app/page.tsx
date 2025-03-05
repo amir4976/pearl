@@ -8,12 +8,12 @@ import LastestProduct from "@/components/Templates/index/LastestProducts/Lastest
 export default function Home() {
   return (
     <>
-      <IndexLayout>
+      <div className="bg-before">
         <Landing />
         <CallactionSwiper />
-        <AboutUs/>
-        <LastestProduct/>
-      </IndexLayout>
+        <AboutUs />
+        <LastestProduct />
+      </div>
     </>
   );
 }

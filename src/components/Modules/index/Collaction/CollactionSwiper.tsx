@@ -39,7 +39,7 @@ const CollSwiper: React.FC<Props> = () => {
         ❮
       </button>
       <button
-        ref={nextRef} 
+        ref={nextRef}
         className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-black text-white p-2 rounded-full max-xl:right-0 max-md:hidden"
       >
         ❯
@@ -80,12 +80,24 @@ const CollSwiper: React.FC<Props> = () => {
           }, 10);
         }}
       >
-        <SwiperSlide><CollactionCard /></SwiperSlide>
-        <SwiperSlide><CollactionCard /></SwiperSlide>
-        <SwiperSlide><CollactionCard /></SwiperSlide>
-        <SwiperSlide><CollactionCard /></SwiperSlide>
-        <SwiperSlide><CollactionCard /></SwiperSlide>
-        <SwiperSlide><CollactionCard /></SwiperSlide>
+        <SwiperSlide>
+          <CollactionCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <CollactionCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <CollactionCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <CollactionCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <CollactionCard />
+        </SwiperSlide>
+        <SwiperSlide>
+          <CollactionCard />
+        </SwiperSlide>
       </Swiper>
 
       {/* Custom Pagination */}

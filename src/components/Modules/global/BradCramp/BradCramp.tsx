@@ -3,12 +3,14 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
+
 const breadcrumbLabels: Record<string, string> = {
   home: "خانه",
   aboutus: "درباره ما",
   somepage: "برگه‌ای",
   contact: "تماس با ما",
   Regeister: "ثبت نام",
+  myAccount: "حساب کاربری من",
 };
 
 const Breadcrumbs = () => {
@@ -18,7 +20,11 @@ const Breadcrumbs = () => {
   return (
     <>
       <div className="my-7 mx-3">
-        <h1 className="text-5xl font-DBOLD ">ثبت نام</h1>
+        <div className="text-5xl font-DBOLD ">
+          {pathSegments.map((segment, index) => {
+            return <p key={index}>{breadcrumbLabels[segment] || segment}</p>;
+          })}
+        </div>
         <nav aria-label="breadcrumb">
           <ul className="flex space-x-2 rtl:flex-row-reverse">
             <li>
