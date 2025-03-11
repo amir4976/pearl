@@ -1,0 +1,31 @@
+/* input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 3px;
+    height: 14px;
+    background: #fbbf24;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+  } */
+
+  .tombs::-webkit-slider-thumb {
+    appearance: none;
+    width: 5px;
+    height: 14px;
+    background: #fbbf24;
+    cursor: pointer;
+    pointer-events: auto;
+    margin-top: -6px;
+  }
+  .tombs::-webkit-slider-runnable-track{
+    background: #5f5d59;
+    height: 1px;
+  }
+  .tombs::-moz-range-track{
+    background: #fbbf24;
+    height: 10px;
+  }
+  .tombs::-webkit-slider-runnable-track{
+    background: #fbbf24;
+  }
+  

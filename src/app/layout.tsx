@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import React from "react";
 import IndexLayout from "@/components/layout/IndexLayout";
+import Providers from "./StroeProvider";
+
 const Danablack = localFont({
   src: "../../public/fonts/DanaFaNum-Black.woff",
   variable: "--font-dana-black",
@@ -46,8 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`
+      <Providers>
+        <body
+          className={`
           ${Danablack.variable} 
           ${Danabold.variable} 
           ${Danademi.variable} 
@@ -56,9 +59,10 @@ export default function RootLayout({
           ${Danareq.variable} 
            
           antialiased`}
-      >
-        <IndexLayout>{children}</IndexLayout>
-      </body>
+        >
+          <IndexLayout>{children}</IndexLayout>
+        </body>
+      </Providers>
     </html>
   );
 }

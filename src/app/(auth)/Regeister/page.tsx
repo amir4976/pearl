@@ -1,5 +1,5 @@
 "use client";
-import IndexLayout from "@/components/layout/IndexLayout";
+
 import BradCramp from "@/components/Modules/global/BradCramp/BradCramp";
 import Login from "@/components/Modules/Register/Login";
 import RegisterForm from "@/components/Modules/Register/Register";
@@ -33,9 +33,7 @@ function Register() {
             <button
               className="w-fit mr-auto ml-auto bg-MainColor p-2 px-4 rounded-lg text-black font-DM"
               onClick={() =>
-                setStatuse((prev) =>
-                  prev == "register" ? "login" : "register"
-                )
+                  Status ==='register' ? setLogin() : setRegister()
               }
             >
               {Status == "register" ? "ورود" : "ثبت نام"}

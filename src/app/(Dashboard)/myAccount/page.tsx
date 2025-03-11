@@ -1,15 +1,23 @@
+'use client'
+
+
+import {useDispatch, useSelector } from "react-redux";
 import AccountLayout from "@/components/layout/AccountLayout";
 import DushBouardBtn from "@/components/Modules/Account/DushbouadBtn/DushBouardBtn";
 import { Heart, Location, Paperclip } from "iconsax-react";
 import { LayoutDashboard, ListCheck, LogOutIcon, UserCircle } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
+import { RootState } from "@/Redux/Store";
 
-function page() {
+
+function Page() {
+   const user = useSelector((state:RootState) => state.LoginSlice.user);
+  console.log(user)
   return (
     <div>
       <AccountLayout>
         <div className="p-7">
-          <p>سلام {"user name "} (userName نیستید؟ خارج شوید)</p>
+          <p>سلام {user?.userName} ( نیستید؟ خارج شوید)</p>
           <p className="mt-5">
             از طریق پیشخوان حساب کاربری‌تان، می‌توانید سفارش‌های اخیرتان را
             مشاهده، آدرس‌های حمل و نقل و صورتحساب‌تان را مدیریت و جزییات حساب
@@ -36,4 +44,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

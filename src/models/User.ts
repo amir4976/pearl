@@ -8,11 +8,11 @@ const user = mongoose.Schema({
   },
   name: {
     type: String,
-    require: true,
+    default: "user",
   },
   lastName: {
     type: String,
-    require: true,
+    default: "user",
   },
   email:{
     type:String,
@@ -25,10 +25,20 @@ const user = mongoose.Schema({
   address:{
     type: mongoose.Types.ObjectId,
     ref:'Addresses',
+    default:null
   },
   favorites:{
     type:mongoose.Types.ObjectId,
     ref:'favorits',
+    default:null
+  },
+  role:{
+    type:String,
+    default:'USER'
+  },
+  refreshToken:{
+    type:String,
+    default:null
   }
   
 });

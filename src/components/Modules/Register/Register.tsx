@@ -1,18 +1,59 @@
+"use client";
+import { useRouter } from 'next/navigation'
 import React from "react";
-import Link from "next/link";
+import { useRef } from "react";
+import Swal from "sweetalert2";
 
 function RegisterFrom() {
+  const router= useRouter()
+  const userNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const handleRegistration =async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // جلوگیری از ریفرش شدن صفحه
+
+    const userData = {
+      userName: userNameRef.current?.value,
+      email: emailRef.current?.value,
+      password: passwordRef.current?.value,
+    };
+    const fetchData = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/api/Signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+    
+    if(fetchData.status===201){
+      router.push('/myAccount')
+    }else{
+     Swal.fire({
+      title: 'خطا',
+      text: 'خطایی رخ داده است',
+      icon: 'error',
+      confirmButtonText: 'باشه'
+     })
+    }
+  }
+
+
   return (
     <>
       <p className="text-2xl font-DB mb-2">ثبت نام</p>
-      <form action="" className="flex flex-col gap-5 ">
+      <form
+        action=""
+        onSubmit={(event) => handleRegistration(event)}
+        className="flex flex-col gap-5 "
+      >
         <div className="flex flex-col gap-3">
           <label htmlFor="userName">
             {" "}
             نام کاربری <span className="text-red-500">*</span>
           </label>
           <input
-            id="userName"    
+            ref={userNameRef}
+            id="userName"
             className="p-2 rounded-full w-full bg-transparent border border-gray-600"
             type="text"
           />
@@ -24,6 +65,7 @@ function RegisterFrom() {
             ادرس ایمیل<span className="text-red-500">*</span>
           </label>
           <input
+            ref={emailRef}
             id="Email"
             className="p-2 rounded-full w-full bg-transparent border border-gray-600"
             type="text"
@@ -36,6 +78,7 @@ function RegisterFrom() {
             گذرواژه<span className="text-red-500">*</span>
           </label>
           <input
+            ref={passwordRef}
             id="auth"
             className="p-2 rounded-full w-full bg-transparent border border-gray-600"
             type="text"
@@ -48,7 +91,10 @@ function RegisterFrom() {
           توضیح داده شده است
         </p>
         <div className="">
-          <button className="w-full  text-black bg-MainColor p-2 rounded-md">
+          <button
+            type="submit"
+            className="w-full  text-black bg-MainColor p-2 rounded-md"
+          >
             ورود
           </button>
         </div>

@@ -11,6 +11,7 @@ const breadcrumbLabels: Record<string, string> = {
   contact: "تماس با ما",
   Regeister: "ثبت نام",
   myAccount: "حساب کاربری من",
+  Store: "فروشگاه",
 };
 
 const Breadcrumbs = () => {
