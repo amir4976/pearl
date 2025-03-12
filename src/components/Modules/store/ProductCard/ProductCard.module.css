@@ -1,0 +1,35 @@
+
+.card{
+    transition: all 0.3s linear;
+}
+ .card:hover{
+    transform: translateY(-15px);
+}
+
+.FadeOut {
+  animation: fadeIn 0.5s ease-in-out;
+  bottom:0px;
+} 
+
+.FadeIn {
+  animation: fadeOut 0.5s ease-in-out;
+} 
+
+@keyframes fadeIn {
+  from {
+    bottom: -60px;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    bottom: 0px;
+  }
+  to {
+    bottom: -60px;
+  }
+}
+
