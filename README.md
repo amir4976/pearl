@@ -1,6 +1,6 @@
 # Pearl - Jewelry Store
 
-![Pearl Logo](https://your-image-url.com/logo.png)  
+![Pearl Logo](./public/image/Group.png)  
 **An elegant and modern jewelry store built with Next.js, Tailwind CSS, Redux, and MongoDB.**
 
 ## 🚀 Live Demo
