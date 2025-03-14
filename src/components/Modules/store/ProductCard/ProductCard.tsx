@@ -5,11 +5,23 @@ import FlipTextButton from "../../global/AnimateBtn/AnimateBtn";
 import { SearchNormal, ShoppingCart } from "iconsax-react";
 import style from "./ProductCard.module.css";
 import InfoModal from "../../index/InfoModal/InfoModal";
-type Props = {};
+type Props = {
+  product: {
+    name: string;
+    price: number;
+    image: string;
+    description: string;
+    category: string;
+    brand: string;
+    color: string;
+    status: string;
+  }
+};
 
-function ProductCard({}: Props) {
+function ProductCard({product}: Props) {
   const [isHovered, setIsHovered] = React.useState(false);
   const [isShowModal, setIsShowModal] = React.useState(false);
+  console.log(product)
   return (
     <>
       <div
@@ -18,7 +30,7 @@ function ProductCard({}: Props) {
         onMouseLeave={() => setIsHovered(false)}
       >
         <Image
-          src="/image/tiffany-ttrue-wide-ring-63962465_1001393_ED_M-1.webp"
+          src={product.image}
           alt="product"
           width={600}
           height={600}
@@ -31,8 +43,8 @@ function ProductCard({}: Props) {
           }`}
         >
           <div className=" ">
-            <p className="text-md font-DM"> انگشتر مدل شماره 3</p>
-            <p className="font-DB text-MainColor">270,000 تومان</p>
+            <p className="text-md font-DM"> {product.name}</p>
+            <p className="font-DB text-MainColor">{product.price.toLocaleString()} تومان</p>
           </div>
           <div className="bg-black">
             <div className="flex gap-5 px-1 mt-5 ">
@@ -47,7 +59,7 @@ function ProductCard({}: Props) {
           </div>
         </div>
       </div>
-      {isShowModal && <InfoModal setIsShowModal={setIsShowModal} />}
+      {isShowModal && <InfoModal setIsShowModal={setIsShowModal} product={product} />}
     </>
   );
 }

@@ -1,12 +1,8 @@
 import ConnectToDb from "@/utils/ConnectToDb";
-
-const mongoose = require("mongoose");
 import product from "@/models/product";
-import { cookies } from "next/headers";
-
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-
+import User from "@/models/User";
 interface Brand {
   name: string;
   originCountry?: string;
@@ -41,13 +37,13 @@ interface DecodedToken {
   role: string;
   iat: number;
 }
-const GET = async (req) => {
+const GET = async () => {
   ConnectToDb();
   const allProducts = await product.find();
   return Response.json(allProducts);
 };
 
- const POST = async (req: NextRequest): Promise<NextResponse> => {
+const POST = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // دریافت کوکی از درخواست
     const cookieHeader = req.headers.get("cookie");
@@ -78,15 +74,17 @@ const GET = async (req) => {
         process.env.JWT_SECRET as string
       ) as DecodedToken;
     } catch (err) {
-        console.log(err)
+      console.log(err);
       return NextResponse.json(
         { message: "توکن نامعتبر است." },
         { status: 403 }
       );
     }
 
+    const findUser = await User.findOne({ email: decodedToken.email });
+    console.log(findUser);
     // بررسی نقش کاربر (باید ادمین باشد)
-    if (decodedToken.role !== "admin") {
+    if (findUser.role !== "ADMIN") {
       return NextResponse.json(
         { message: "دسترسی غیرمجاز. فقط ادمین‌ها اجازه این عملیات را دارند." },
         { status: 403 }
@@ -178,7 +176,7 @@ const GET = async (req) => {
           { message: "برند باید یک آرایه باشد." },
           { status: 400 }
         );
-      for (let b of brand) {
+      for (const b of brand) {
         if (typeof b.name !== "string" || !b.name.trim())
           return NextResponse.json(
             { message: "نام برند معتبر نیست." },
@@ -199,7 +197,7 @@ const GET = async (req) => {
           { message: "رنگ باید یک آرایه باشد." },
           { status: 400 }
         );
-      for (let c of color) {
+      for (const c of color) {
         if (typeof c.name !== "string" || !c.name.trim())
           return NextResponse.json(
             { message: "نام رنگ معتبر نیست." },
@@ -223,7 +221,7 @@ const GET = async (req) => {
           { message: "تگ‌ها باید یک آرایه باشند." },
           { status: 400 }
         );
-      for (let t of tags) {
+      for (const t of tags) {
         if (typeof t.name !== "string" || !t.name.trim())
           return NextResponse.json(
             { message: "نام تگ معتبر نیست." },
@@ -237,6 +235,19 @@ const GET = async (req) => {
       }
     }
 
+    await product.create({
+      name,
+      longDescription,
+      shortDescription,
+      price,
+      stock,
+      category,
+      image,
+      brand,
+      color,
+      tags,
+      offer,
+    });
     // اگر همه چیز اوکی بود، محصول را ذخیره کن (در اینجا فقط یک پاسخ می‌فرستیم)
     return NextResponse.json(
       { message: "محصول با موفقیت اضافه شد.", data: body },
