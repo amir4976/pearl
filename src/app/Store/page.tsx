@@ -1,7 +1,7 @@
 "use client";
 
 import Breadcrumbs from "@/components/Modules/global/BradCramp/BradCramp";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import PriceFilter from "@/components/Modules/store/filters/PriceFilter";
 import ProductCard from "@/components/Modules/store/ProductCard/ProductCard";
@@ -10,27 +10,28 @@ import BrandFilter from "@/components/Modules/store/filters/BrandFilter";
 import ColorFilter from "@/components/Modules/store/filters/ColorFilter";
 import FilterDrawer from "@/components/Modules/store/FilterDrawer/FilterDrawer";
 
-const products = [
-  { id: 1, name: "محصول ۱", price: 300000 },
-  { id: 2, name: "محصول ۲", price: 450000 },
-  { id: 3, name: "محصول ۳", price: 600000 },
-  { id: 4, name: "محصول ۴", price: 750000 },
-];
+import {getAllUsers} from "@/Redux/slices/ProductSlice";
+import { useDispatch, UseDispatch, useSelector } from "react-redux";
+import { RootState } from "@/Redux/Store";
+import product from "@/models/product";
+
 
 function Page() {
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAllUsers('/api/Products'))
+  },[dispatch]);
+
+  const  AllProducts = useSelector((state:RootState)=>state.product.products)
+
+
+  console.log(AllProducts)
+  const [filteredProducts, setFilteredProducts] = useState(AllProducts);
   const [isShowFilterDrawer, setIsShowFilterDrawer] = useState(false);
-  const product = [
-    { id: 1, name: "انگشتر نقره مردانه", price: 1200000, stock: 5 },
-    { id: 2, name: "انگشتر طلا زنانه", price: 5400000, stock: 3 },
-    { id: 3, name: "انگشتر عقیق اصل", price: 950000, stock: 8 },
-    { id: 4, name: "انگشتر فیروزه زنانه", price: 1700000, stock: 6 },
-    { id: 5, name: "انگشتر استیل اسپرت", price: 450000, stock: 12 },
-    { id: 6, name: "انگشتر یاقوت سلطنتی", price: 3200000, stock: 4 },
-  ];
+
   const handleFilter = (min, max) => {
-    const filtered = products.filter((p) => p.price >= min && p.price <= max);
-    setFilteredProducts(filtered);
+    // const filtered = products.filter((p) => p.price >= min && p.price <= max);
+    // setFilteredProducts(filtered);
   };
 
   return (
@@ -38,7 +39,12 @@ function Page() {
       <Breadcrumbs />
       <div className="w-full h-fit grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="max-md:flex hidden">
-          <button className="px-2 py-1 border-b mx-5" onClick={()=>setIsShowFilterDrawer(true)}>فیلتر ها</button>
+          <button
+            className="px-2 py-1 border-b mx-5"
+            onClick={() => setIsShowFilterDrawer(true)}
+          >
+            فیلتر ها
+          </button>
         </div>
         <div className="col-span-1 max-md:hidden flex flex-col gap-5">
           {/* filter base on status */}
@@ -86,21 +92,24 @@ function Page() {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            {
+              AllProducts.map((product,index) => (
+                <ProductCard key={index} product={product}  />
+              ))
+            }
+            {/* <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard /> */}
           </div>
         </div>
       </div>
-      {
-        isShowFilterDrawer && (<FilterDrawer setIsShowFilterDrawer={setIsShowFilterDrawer} />)
-      }
+      {isShowFilterDrawer && (
+        <FilterDrawer setIsShowFilterDrawer={setIsShowFilterDrawer} />
+      )}
     </div>
-
-
   );
 }
 

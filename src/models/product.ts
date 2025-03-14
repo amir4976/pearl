@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ProductSchema = mongoose.Schema({
   name: {
@@ -67,4 +67,4 @@ const ProductSchema = mongoose.Schema({
   },
 });
 
-export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
+export default mongoose.models.Product ||  mongoose.model("Product", ProductSchema);
