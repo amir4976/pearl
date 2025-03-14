@@ -2,7 +2,9 @@
 <p align="center">
   <img src="./public/image/Group.png" alt="Pearl Logo"/>
 </p>
+
 # Pearl - Jewelry Store
+
 **An elegant and modern jewelry store built with Next.js, Tailwind CSS, Redux, and MongoDB.**
 
 ## 🚀 Live Demo
