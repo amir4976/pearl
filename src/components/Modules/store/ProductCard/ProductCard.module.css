@@ -2,9 +2,6 @@
 .card{
     transition: all 0.3s linear;
 }
- .card:hover{
-    transform: translateY(-15px);
-}
 
 .FadeOut {
   animation: fadeIn 0.5s ease-in-out;
