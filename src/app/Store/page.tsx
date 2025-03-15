@@ -13,7 +13,7 @@ import FilterDrawer from "@/components/Modules/store/FilterDrawer/FilterDrawer";
 import {getAllUsers} from "@/Redux/slices/ProductSlice";
 import { useDispatch, UseDispatch, useSelector } from "react-redux";
 import { RootState } from "@/Redux/Store";
-import product from "@/models/product";
+
 
 
 function Page() {
@@ -23,7 +23,7 @@ function Page() {
   },[dispatch]);
 
   const  AllProducts = useSelector((state:RootState)=>state.product.products)
-
+  const isLoading = useSelector((state:RootState)=>state.product.loading)
 
   console.log(AllProducts)
   const [filteredProducts, setFilteredProducts] = useState(AllProducts);
@@ -96,6 +96,9 @@ function Page() {
               AllProducts.map((product,index) => (
                 <ProductCard key={index} product={product}  />
               ))
+            }
+            {
+              isLoading && <div>Loading...</div>
             }
             {/* <ProductCard />
             <ProductCard />

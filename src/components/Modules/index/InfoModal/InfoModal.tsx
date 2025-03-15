@@ -18,13 +18,14 @@ interface InfoModalProps {
     color: [{ name: string; hexCode: string }];
     tags: [{ name: string; type: string }];
     status: string;
+    offer: number;
   };
 }
 
 // InfoModal component
 const InfoModal: React.FC<InfoModalProps> = ({ setIsShowModal, product }) => {
   const [counter, setCounter] = React.useState<number>(1);
-
+  const [selectedColor, setSelectedColor] =React.useState<string>();
   // Prevent counter from going below 1
   if (counter < 1) {
     setCounter(1);
@@ -56,12 +57,33 @@ const InfoModal: React.FC<InfoModalProps> = ({ setIsShowModal, product }) => {
           <div className="text-2xl font-DBOLD">{product.name}</div>
 
           {/* Product Price */}
-          <div className="text-xl font-DB text-MainColor">
-            {product.price.toLocaleString()} تومان
+          <div className="flex gap-2">
+            {product.offer > 0 && (
+              <>
+                <p className="font-DM line-through  text-gray-600">
+                  {product.price.toLocaleString()} تومان
+                </p>
+                <p className="font-DB text-MainColor">
+                  {(
+                    product.price -
+                    (product.offer / 100) * product.price
+                  ).toLocaleString()}{" "}
+                  تومان
+                </p>
+              </>
+            )}
+            {/* if offer is 0 */}
+            {product.offer === 0 && (
+              <p className="font-DB text-MainColor">
+                {product.price.toLocaleString()} تومان
+              </p>
+            )}
           </div>
 
           {/* Short Description */}
-          <div className="text-sm text-gray-400">{product.shortDescription}</div>
+          <div className="text-sm text-gray-400">
+            {product.shortDescription}
+          </div>
 
           {/* Product Colors */}
           <div className="color flex items-center gap-3">
@@ -70,8 +92,13 @@ const InfoModal: React.FC<InfoModalProps> = ({ setIsShowModal, product }) => {
               {product.color.map((color, index) => (
                 <div
                   key={index}
-                  className="w-8 h-6 rounded-full"
+                  className={`w-8 h-8 rounded-full cursor-pointer border-2 ${
+                    selectedColor === color.name
+                      ? "border-white"
+                      : "border-transparent"
+                  }`}
                   style={{ backgroundColor: color.hexCode }}
+                  onClick={() => setSelectedColor(color.name)}
                 ></div>
               ))}
             </div>

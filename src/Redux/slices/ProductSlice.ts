@@ -3,6 +3,7 @@ import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 
 const initialState = {
   products: [],
+  loading: false,
 };
 
 export const getAllUsers = createAsyncThunk(
@@ -28,12 +29,15 @@ const product = createSlice({
     extraReducers:(builder)=>{
         builder.addCase(getAllUsers.fulfilled,(state,action)=>{
             state.products = action.payload
+            state.loading = false
         })
         .addCase(getAllUsers.pending,(state,action)=>{
             state.products = []
+            state.loading = true
         })
         .addCase(getAllUsers.rejected,(state,action)=>{
             state.products = []
+            state.loading = false
             console.log('fetch filed')
         })
     }
