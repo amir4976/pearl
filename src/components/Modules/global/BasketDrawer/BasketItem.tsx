@@ -1,14 +1,16 @@
 import React from "react";
 import Image from "next/image";
-type Props = {};
+type Props = {
+  item: any;
+};
 
-function BasketItem({}: Props) {
+function BasketItem({item}: Props) {
   return (
     <div className="card w-full h-fit p-2 flex gap-3  relative">
       <div className="cover ">
         <Image
           src={
-            "/image/tiffany-co-schlumbergersixteen-stone-ring-19186555_1039864_ED-1.webp"
+           item.image
           }
           alt="cover"
           width={65}
@@ -16,9 +18,9 @@ function BasketItem({}: Props) {
         />
       </div>
       <div className="flex flex-col text-sm font-DM gap-2">
-        <p>انگشتر مدل شماره 4 - طلایی</p>
+        <p>{item.name}</p>
         <p>
-          <span className="text-gray-500">1 × </span> 550,000 تومان
+          <span className="text-gray-500">{item.quantity} × </span>{(item.price).toLocaleString()} تومان
         </p>
       </div>
 

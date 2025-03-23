@@ -37,9 +37,10 @@ interface DecodedToken {
   role: string;
   iat: number;
 }
+
 const GET = async () => {
   ConnectToDb();
-  const allProducts = await product.find();
+  const allProducts = await product.find().populate('Comments').lean()
   return Response.json(allProducts);
 };
 

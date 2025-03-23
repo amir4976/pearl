@@ -4,43 +4,51 @@ import Link from "next/link";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+
+
+// login handler 
 function Login() {
   const adenifierRef = useRef<HTMLInputElement>(null);
   const PasswordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
+  // login function
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("first");
+    // it gett adentifire and password 
     const adentifire = adenifierRef.current?.value;
     const password = PasswordRef.current?.value;
+    // make them object
     const data = {
       adentifire,
-      password
+      password,
     };
-    console.log(data);
-    const fatchHandler = await fetch(
-      "/api/Login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
-    console.log(fatchHandler);
+    // and send them to the server
+    const fatchHandler = await fetch("/api/Login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    // if the status is 200 then redirect to the user page if admin redirect to the admin page
     if (fatchHandler.status === 200) {
-      console.log('first')
-      router.push("/myAccount");
-    }else if(fatchHandler.status ===400){
+      const data = await fatchHandler.json();
+      if (data?.role === "ADMIN") {
+        router.push("/P-admin");
+      } else {
+        router.push("/myAccount");
+      }
+      // if the status is 400 then show the error message
+    } else if (fatchHandler.status === 400) {
       Swal.fire({
         title: "خطا",
         text: "نام کاربری یا رمز عبور اشتباه است",
         icon: "error",
         confirmButtonText: "باشه",
       });
-    }else {
+      // and if the status is 401 or any other then show the error message
+    } else {
       Swal.fire({
         title: "خطا",
         text: "خطایی رخ داده است",
@@ -49,6 +57,9 @@ function Login() {
       });
     }
   };
+
+
+  
   return (
     <>
       <p className="text-2xl font-DB mb-2">ورود </p>
