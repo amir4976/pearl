@@ -12,6 +12,7 @@ const breadcrumbLabels: Record<string, string> = {
   Regeister: "ثبت نام",
   myAccount: "حساب کاربری من",
   Store: "فروشگاه",
+  favorits:"علاقه مندی ها"
 };
 
 const Breadcrumbs = () => {

@@ -7,7 +7,7 @@ export const POST = async (req:NextRequest) => {
   ConnectToDb();
   try {
     const { adentifire, password } = await req.json();
-    console.log('first')
+ 
 
     const secret = process.env.JWT_SECRET || "default_secret";
   
@@ -15,13 +15,13 @@ export const POST = async (req:NextRequest) => {
       $or: [{ email: adentifire}, { userName: adentifire }],
     });
     
-    console.log(user)
+
     if (!user) {
       return Response.json("کاربری با این مشخصات یافت نشد", { status: 400 });
     }
-    console.log('first')
+  
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    console.log('sac')
+
     if (!isPasswordValid) {
       return Response.json("رمز عبور اشتباه است", { status: 400 });
     }
@@ -29,7 +29,7 @@ export const POST = async (req:NextRequest) => {
       expiresIn: "1d",
     });
 
-    return Response.json("success", {
+    return Response.json(user, {
       status: 200,
       headers: {
         "Set-Cookie": `token=${userToken}; HttpOnly; Path=/; Max-Age=86400;`,

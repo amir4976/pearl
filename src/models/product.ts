@@ -65,6 +65,13 @@ const ProductSchema = mongoose.Schema({
     min: 0,
     max: 100,
   },
+  Comments: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Comments",
+    },
+  ],
 });
 
-export default mongoose.models.Product ||  mongoose.model("Product", ProductSchema);
+export default mongoose.models.Product ||
+  mongoose.model("Product", ProductSchema);

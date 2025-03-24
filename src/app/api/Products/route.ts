@@ -3,6 +3,7 @@ import product from "@/models/product";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import User from "@/models/User";
+import "@/models/Comments";
 interface Brand {
   name: string;
   originCountry?: string;
@@ -37,9 +38,11 @@ interface DecodedToken {
   role: string;
   iat: number;
 }
+
 const GET = async () => {
   ConnectToDb();
-  const allProducts = await product.find();
+  const allProducts = await product.find().lean().populate('Comments')
+  console.log(allProducts)
   return Response.json(allProducts);
 };
 
