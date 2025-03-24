@@ -16,13 +16,17 @@ const basketSlice = createSlice({
       }
     },
     removeFromBasket: (state, action) => {
-      const index = state.basket.findIndex((item) => item.id === action.payload.id);
+      console.log(action.payload)
+      console.log(state.basket)
+      const index = state.basket.findIndex((item) => item.id === action.payload);
+      console.log(index)
       if (index !== -1) {
         state.basket.splice(index, 1);
         if (typeof window !== "undefined") {
           localStorage.setItem("basket", JSON.stringify(state.basket));
         }
       }
+  
     },
     clearBasket: (state) => {
       state.basket = [];

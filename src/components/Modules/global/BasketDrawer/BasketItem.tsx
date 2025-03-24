@@ -1,9 +1,11 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { CloseCircle } from "iconsax-react";
-import Btn from "../btn/Btn";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { loadBasketFromStorage, removeFromBasket } from "@/Redux/slices/Basket";
+import { RootState } from "@/Redux/Store";
 type Props = {
   item: {
     id: string;
@@ -15,7 +17,22 @@ type Props = {
   setBasketItems: (items: any[]) => void;
 };
 
+
+
 function BasketItem({ item, setBasketItems }: Props) {
+
+  const dispath = useDispatch()
+
+  useEffect(()=>{
+    dispath(loadBasketFromStorage())
+  },[dispath])
+
+
+
+  
+
+
+
   const handleRemoveItem = (itemId: string) => {
     Swal.fire({
       title: "حذف کالا",
@@ -34,12 +51,13 @@ function BasketItem({ item, setBasketItems }: Props) {
         const updatedBasket = localStorage.getItem("basket");
 
         if (updatedBasket) {
-          const parsedBasket = JSON.parse(updatedBasket);
-          const updatedBasketItems = parsedBasket.filter(
-            (item: any) => item.id !== itemId
-          );
-          localStorage.setItem("basket", JSON.stringify(updatedBasketItems));
-          setBasketItems(updatedBasketItems);
+           dispath(removeFromBasket(itemId));
+           const updatedBasket = JSON.parse(localStorage.getItem("basket"));
+           if(updatedBasket){
+             setBasketItems(updatedBasket)
+           }else{
+            setBasketItems([])
+           }
           Swal.fire(
             {
               icon: "success",
