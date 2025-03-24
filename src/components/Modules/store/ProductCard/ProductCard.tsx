@@ -6,6 +6,7 @@ import { SearchNormal, ShoppingCart } from "iconsax-react";
 import style from "./ProductCard.module.css";
 import InfoModal from "../../index/InfoModal/InfoModal";
 import Link from "next/link";
+import ProductOrder from "../ProductOrder/ProductOrder";
 
 type Props = {
   product: {
@@ -83,19 +84,20 @@ const ProductCard: React.FC<Props> = ({ product }) => {
               )}
             </div>
 
-            <div className="flex gap-5 mt-5">
-              <div
-                className="w-full"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
-              >
-                <FlipTextButton
-                  primaryText="افزودن به سبد خرید"
-                  secondaryText={<ShoppingCart size="24" color="#000" />}
-                />
-              </div>
+            <div
+              className="flex mt-5 gap-3"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+            >
+              <ProductOrder
+                name={product.name}
+                price={product.price}
+                id={product._id}
+                image={product.image}
+                isCounter={false}
+              />
 
               <button
                 onClick={(e) => {

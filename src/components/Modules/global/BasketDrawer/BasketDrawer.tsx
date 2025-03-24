@@ -40,6 +40,8 @@ const BasketDrawer: React.FC<BasketDrawerProps> = ({
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
+
+
   return (
     <div
       className={`z-50 fixed left-0 top-0 w-full h-screen backdrop-blur-sm bg-black/50 ${Style.fadeInBackGround}`}
@@ -57,7 +59,7 @@ const BasketDrawer: React.FC<BasketDrawerProps> = ({
 
         <div className="w-full h-3/4 overflow-auto">
           {basketItems.length > 0 ? (
-            basketItems.map((item) => <BasketItem key={item.id} item={item} />)
+            basketItems.map((item) => <BasketItem key={item.id} item={item} setBasketItems={setBasketItems} />)
           ) : (
             <p className="text-center">سبد خرید شما خالی است</p>
           )}

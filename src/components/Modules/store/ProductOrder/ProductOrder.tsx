@@ -3,16 +3,17 @@ import React from "react";
 import FlipTextButton from "../../global/AnimateBtn/AnimateBtn";
 import { Bag } from "iconsax-react";
 import { useDispatch } from "react-redux";
-import { addToBasket } from "@/Redux/slices/Basket";
+import { addToBasket, loadBasketFromStorage } from "@/Redux/slices/Basket";
 import Swal from "sweetalert2";
 type Props = {
   id: number;
   name: string;
   price: number;
   image: string;
+  isCounter?: boolean;
 };
 
-function ProductOrder({ name, id, price, image }: Props) {
+function ProductOrder({ name, id, price, image, isCounter }: Props) {
   const dispatch = useDispatch();
   const [counter, setCounter] = React.useState<number>(1);
   const [isInBasket, setIsInBasket] = React.useState<boolean>(false);
@@ -33,7 +34,8 @@ function ProductOrder({ name, id, price, image }: Props) {
   }, [id]);
 
   // handle add to cart
-  const addToCart = async () => {
+  const addToCart = async (e) => {
+    e.stopPropagation();
     const CartItems = {
       id,
       name,
@@ -41,6 +43,9 @@ function ProductOrder({ name, id, price, image }: Props) {
       image,
       quantity: counter,
     };
+    // first load the basket from local storage
+    dispatch(loadBasketFromStorage())
+    // and then add the product to the basket
     dispatch(addToBasket(CartItems));
     setIsInBasket(true);
 
@@ -56,28 +61,31 @@ function ProductOrder({ name, id, price, image }: Props) {
   };
 
   return (
-    <div className="flex gap-2">
-      <div className="counter border border-gray-500 rounded-full flex">
-        <button
-          className="p-2 border-l"
-          onClick={() => setCounter((prev) => prev - 1)}
-        >
-          -
-        </button>
-        <p className="p-2">{counter}</p>
-        <button
-          className="p-2 border-r"
-          onClick={() => setCounter((prev) => prev + 1)}
-        >
-          +
-        </button>
-      </div>
+    <div className="flex gap-2 w-full">
+      {isCounter && (
+        <div className="counter border border-gray-500 rounded-full flex">
+          <button
+            className="p-2 border-l"
+            onClick={() => setCounter((prev) => prev - 1)}
+          >
+            -
+          </button>
+          <p className="p-2">{counter}</p>
+          <button
+            className="p-2 border-r"
+            onClick={() => setCounter((prev) => prev + 1)}
+          >
+            +
+          </button>
+        </div>
+      )}
       {isInBasket ? (
-        <button className="bg-MainColor text-black px-4 py-2 rounded-lg font-semibold ">
+        <button className="bg-blue-500  w-full  text-white px-4 py-2 rounded-lg font-semibold ">
+          <span>✔</span>
           موجود در سبد خرید
         </button>
       ) : (
-        <div className="w-full" onClick={() => addToCart()}>
+        <div className="w-full" onClick={(e) => addToCart(e)}>
           <FlipTextButton
             primaryText="افزودن به سبد خرید"
             secondaryText={<Bag size="32" color="#000" />}

@@ -1,4 +1,4 @@
-import FlipTextButton from "@/components/Modules/global/AnimateBtn/AnimateBtn";
+import FavoriteBtn from "@/components/Modules/store/Favorite/FavoriteBtn";
 import ProductOrder from "@/components/Modules/store/ProductOrder/ProductOrder";
 import InfoBar from "@/components/Templates/store/InfoBar";
 import Image from "next/image";
@@ -62,9 +62,10 @@ async function Page({ params }: { params: { id: string } }) {
               price={datas.price}
               id={datas._id}
               image={datas.image}
+              isCounter={true}
             />
           </div>
-          <div className="">❤ افزودن به علاقه‌مندی‌ها</div>
+          <FavoriteBtn id={id}/>
           <hr />
           <div className="flex gap-1">
             <p>دسته:</p>
