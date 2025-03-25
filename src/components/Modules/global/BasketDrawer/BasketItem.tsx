@@ -52,7 +52,7 @@ function BasketItem({ item, setBasketItems }: Props) {
 
         if (updatedBasket) {
            dispath(removeFromBasket(itemId));
-           const updatedBasket = JSON.parse(localStorage.getItem("basket"));
+           const updatedBasket = JSON.parse(localStorage.getItem("basket")||"{}");
            if(updatedBasket){
              setBasketItems(updatedBasket)
            }else{

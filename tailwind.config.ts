@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+			PannelBg : "var(--PannelBg)",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			MainColor: 'var( --mainThemeColor)',
