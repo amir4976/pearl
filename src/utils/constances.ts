@@ -1,7 +1,8 @@
 export const pAdminLinks = [
     {
       title: "پیشخوان",
-      url: "/admin",
+      url: "/PAdmin",
+
     },
     {
       title: "محصولات",
