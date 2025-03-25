@@ -3,33 +3,14 @@ import { url } from "inspector";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-function Menu() {
+
+
+function Menu({urls}:{urls:any}) {
   const styles = {
     Active: "bg-gray-500/25",
   };
   const pathname = usePathname();
-  const urls = [
-    {
-      title: "پیشخوان",
-      url: "/myAccount",
-    },
-    {
-      title: "سفارش‌ها",
-      url: "/myAccount",
-    },
-    {
-      title: "آدرس",
-      url: "/myAccount",
-    },
-    {
-      title: "جزئیات حساب",
-      url: "/myAccount",
-    },
-    {
-      title: "علاقه مندی",
-      url: "/favorits",
-    },
-  ];
+
   return (
     <div className="w-full border-l border-gray-700 h-fit p-7 font-DD  max-md:border-l-0 ">
       <div className="border-b p-3 border-gray-700">حساب کاربری من</div>
