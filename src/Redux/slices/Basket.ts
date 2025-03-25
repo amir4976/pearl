@@ -10,23 +10,28 @@ const basketSlice = createSlice({
   reducers: {
     addToBasket: (state, action) => {
       state.basket.push(action.payload);
-
+      // console.log(action.payload)
+      if (typeof window !== "undefined") {
+        localStorage.setItem("basket", JSON.stringify(state.basket));
+      }
+    },
+    updateBasket: (state, action) => {
+      state.basket = action.payload;
       if (typeof window !== "undefined") {
         localStorage.setItem("basket", JSON.stringify(state.basket));
       }
     },
     removeFromBasket: (state, action) => {
-      console.log(action.payload)
-      console.log(state.basket)
-      const index = state.basket.findIndex((item) => item.id === action.payload);
-      console.log(index)
+      const index = state.basket.findIndex(
+        (item) => item.id === action.payload
+      );
+      console.log(index);
       if (index !== -1) {
         state.basket.splice(index, 1);
         if (typeof window !== "undefined") {
           localStorage.setItem("basket", JSON.stringify(state.basket));
         }
       }
-  
     },
     clearBasket: (state) => {
       state.basket = [];
@@ -45,5 +50,11 @@ const basketSlice = createSlice({
   },
 });
 
-export const { addToBasket, removeFromBasket, clearBasket, loadBasketFromStorage } = basketSlice.actions;
+export const {
+  addToBasket,
+  removeFromBasket,
+  clearBasket,
+  loadBasketFromStorage,
+  updateBasket,
+} = basketSlice.actions;
 export default basketSlice.reducer;
