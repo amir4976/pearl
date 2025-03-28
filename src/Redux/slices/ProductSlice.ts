@@ -8,15 +8,15 @@ const initialState = {
 
 export const getAllUsers = createAsyncThunk(
     "product/getAllUsers",
-    async (url, { rejectWithValue }) => {
+    async (url , { rejectWithValue }  ) => {
         try {
-            const res = await fetch(url);
+            const res = await fetch('/api/Products');
             if (!res.ok) {
                 throw new Error("Failed to fetch data");
             }
             return await res.json();
         } catch (error) {
-            return rejectWithValue(error.message);
+            return rejectWithValue(error);
         }
     }
 );
@@ -31,11 +31,11 @@ const product = createSlice({
             state.products = action.payload
             state.loading = false
         })
-        .addCase(getAllUsers.pending,(state,action)=>{
+        .addCase(getAllUsers.pending,(state)=>{
             state.products = []
             state.loading = true
         })
-        .addCase(getAllUsers.rejected,(state,action)=>{
+        .addCase(getAllUsers.rejected,(state)=>{
             state.products = []
             state.loading = false
             console.log('fetch filed')

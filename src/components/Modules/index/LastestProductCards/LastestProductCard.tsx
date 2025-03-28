@@ -20,7 +20,7 @@ function LastestProductCard({ cover, title, offer, price }: Props) {
         >
           <Image
             src={"/image/tiffany-tt1-ring-67795121_1010332_ED-1.webp"}
-            className="w-full h-full  rounded-t-full "
+            className="w-full h-full   "
             alt={title}
             width={500}
             height={500}

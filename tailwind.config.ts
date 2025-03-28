@@ -74,7 +74,10 @@ const config: Config = {
   			],
   			DR: [
   				'var(--font-dana-req)'
-  			]
+  			],
+			Dorna:[
+				'var(--font-dorna)'
+			]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

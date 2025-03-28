@@ -58,6 +58,8 @@ function FavoriteBtn({ id }: Props) {
     const requast = await fetch(`/api/favorites/${id}`, {
       method: "DELETE",
     });
+    console.log(id)
+    console.log(await requast.json())
     if (requast.status === 200) {
       setIsFav(false);
       Swal.fire({

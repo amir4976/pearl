@@ -10,28 +10,92 @@ import BrandFilter from "@/components/Modules/store/filters/BrandFilter";
 import ColorFilter from "@/components/Modules/store/filters/ColorFilter";
 import FilterDrawer from "@/components/Modules/store/FilterDrawer/FilterDrawer";
 
-import {getAllUsers} from "@/Redux/slices/ProductSlice";
-import { useDispatch, UseDispatch, useSelector } from "react-redux";
-import { RootState } from "@/Redux/Store";
+import { getAllUsers } from "@/Redux/slices/ProductSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/Redux/Store";
 
-
+interface ProductType {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  status: string;
+  brand: string;
+  color: string;
+  createdAt: number;
+  rate: number;
+}
 
 function Page() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(getAllUsers('/api/Products'))
-  },[dispatch]);
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
-  const  AllProducts = useSelector((state:RootState)=>state.product.products)
-  const isLoading = useSelector((state:RootState)=>state.product.loading)
+  const AllProducts = useSelector((state: RootState) => state.product.products);
+  const isLoading = useSelector((state: RootState) => state.product.loading);
 
-  console.log(AllProducts)
-  const [filteredProducts, setFilteredProducts] = useState(AllProducts);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isShowFilterDrawer, setIsShowFilterDrawer] = useState(false);
 
-  const handleFilter = (min, max) => {
+  useEffect(() => {
+    setFilteredProducts(AllProducts);
+  }, [AllProducts]);
+
+  const handleFilter = () => {
     // const filtered = products.filter((p) => p.price >= min && p.price <= max);
     // setFilteredProducts(filtered);
+  };
+
+  const handleSort = (event: string) => {
+    // ! fix this pleas for me
+    // you have to make a api change for every comments rate update
+    // add popularity and rate to the product model
+
+    switch (event) {
+      case "-1":
+        setFilteredProducts(AllProducts);
+        break;
+
+      case "popularity":
+        setFilteredProducts([...AllProducts]); // اگر لازم باشد، فیلتر را اضافه کنید
+        break;
+
+      case "rating":
+        setFilteredProducts(
+          [...AllProducts].sort(
+            (a: ProductType, b: ProductType) => b.rate - a.rate
+          )
+        );
+        break;
+
+      case "newest":
+        setFilteredProducts(
+          [...AllProducts].sort(
+            (a: ProductType, b: ProductType) => b.createdAt - a.createdAt
+          )
+        );
+        break;
+
+      case "cheap":
+        setFilteredProducts(
+          [...AllProducts].sort(
+            (a: ProductType, b: ProductType) => a.price - b.price
+          )
+        );
+        break;
+
+      case "expensive":
+        setFilteredProducts(
+          [...AllProducts].sort(
+            (a: ProductType, b: ProductType) => b.price - a.price
+          )
+        );
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
@@ -67,7 +131,10 @@ function Page() {
           <div className="sort flex justify-between items-center py-5 bg-[#1a1a1a]  rounded-lg">
             <div className="text-gray-300">خانه / فروشگاه</div>
             <div className="relative">
-              <select className="appearance-none bg-[#1a1a1a] text-MainColor border-b  border-b-MainColor   px-4 py-2 pr-8 focus:outline-none ">
+              <select
+                className="appearance-none bg-[#1a1a1a] text-MainColor border-b  border-b-MainColor   px-4 py-2 pr-8 focus:outline-none "
+                onChange={(e) => handleSort(e.target.value)}
+              >
                 <option value="-1">مرتب سازی پیش‌فرض</option>
                 <option value="popularity">مرتب سازی بر اساس محبوبیت</option>
                 <option value="rating">مرتب سازی بر اساس امتیاز</option>
@@ -92,14 +159,10 @@ function Page() {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-            {
-              AllProducts.map((product,index) => (
-                <ProductCard key={index} product={product}  />
-              ))
-            }
-            {
-              isLoading && <div>Loading...</div>
-            }
+            {filteredProducts.map((product, index) => (
+              <ProductCard key={index} product={product} />
+            ))}
+            {isLoading && <div>Loading...</div>}
             {/* <ProductCard />
             <ProductCard />
             <ProductCard />

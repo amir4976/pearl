@@ -1,54 +1,19 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { Navigation, Pagination } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import CollactionCard from "./CollactionCard";
-import { Swiper as SwiperCore } from "swiper/types";
+import { collaction } from "@/utils/constances";
 
-type Props = {};
-
-const CollSwiper: React.FC<Props> = () => {
-  const prevRef = useRef<HTMLButtonElement | null>(null);
-  const nextRef = useRef<HTMLButtonElement | null>(null);
-  const swiperRef = useRef<SwiperCore | null>(null);
-
-  useEffect(() => {
-    if (swiperRef.current && prevRef.current && nextRef.current) {
-      const swiper = swiperRef.current;
-
-      if (swiper.params.navigation && swiper.navigation) {
-        swiper.params.navigation.prevEl = prevRef.current;
-        swiper.params.navigation.nextEl = nextRef.current;
-        swiper.navigation.init();
-        swiper.navigation.update();
-      }
-    }
-  }, []);
-
+const CollSwiper: React.FC= () => {
   return (
-    <div className="relative w-full p-5">
-      {/* Custom Navigation Buttons */}
-      <button
-        ref={prevRef}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-black text-white p-2 rounded-full  max-xl:left-0 max-md:hidden"
-      >
-        ❮
-      </button>
-      <button
-        ref={nextRef}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-black text-white p-2 rounded-full max-xl:right-0 max-md:hidden"
-      >
-        ❯
-      </button>
-
-      {/* Swiper */}
+    <>
       <Swiper
-        modules={[Navigation, Pagination]}
-        spaceBetween={50}
+        modules={[Pagination]}
+        spaceBetween={20}
         slidesPerView={4}
         breakpoints={{
           300: { slidesPerView: 1 },
@@ -56,67 +21,79 @@ const CollSwiper: React.FC<Props> = () => {
           800: { slidesPerView: 3 },
           1000: { slidesPerView: 4 },
         }}
-        navigation={{
-          prevEl: prevRef.current!,
-          nextEl: nextRef.current!,
-        }}
-        pagination={{ clickable: true, el: ".custom-pagination" }}
         loop={true}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-
-          // Delay initialization to ensure refs are mounted
-          setTimeout(() => {
-            if (swiperRef.current && prevRef.current && nextRef.current) {
-              const swiper = swiperRef.current;
-
-              if (swiper.params.navigation && swiper.navigation) {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
-                swiper.navigation.init();
-                swiper.navigation.update();
-              }
-            }
-          }, 10);
-        }}
+        pagination={{ clickable: true, el: ".custom-pagination" }}
       >
-        <SwiperSlide>
-          <CollactionCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CollactionCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CollactionCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CollactionCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CollactionCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CollactionCard />
-        </SwiperSlide>
+        {collaction.map((coll, index) => (
+          <SwiperSlide key={index}>
+            <CollactionCard {...coll} />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
-      {/* Custom Pagination */}
       <div className="custom-pagination flex justify-center mt-4"></div>
-
-      {/* Custom Styles */}
       <style jsx>{`
         .custom-pagination .swiper-pagination-bullet {
           background-color: #ccc !important;
-          width: 12px;
-          height: 12px;
-          margin: 0 5px;
+          width: 10px;
+          height: 10px;
+          margin: 0 4px;
           opacity: 1;
         }
         .custom-pagination .swiper-pagination-bullet-active {
           background-color: #ff4500 !important;
         }
       `}</style>
-    </div>
+    </>
+
+    // <div className="relative w-full p-5">
+
+    //   {/* Swiper */}
+    //   <Swiper
+    //     modules={[Navigation, Pagination]}
+    //     spaceBetween={20}
+    //     slidesPerView={4}
+    //     breakpoints={{
+    //       300: { slidesPerView: 1 },
+    //       500: { slidesPerView: 2 },
+    //       800: { slidesPerView: 3 },
+    //       1000: { slidesPerView: 4 },
+    //     }}
+    //     loop={true}
+    //     navigation={true} // ✅ مقداردهی صحیح بدون نیاز به `as any`
+    //     pagination={{ clickable: true, el: ".custom-pagination" }}
+    //     onSwiper={(swiper) => {
+    //       swiperRef.current = swiper;
+
+    //       setTimeout(() => {
+    //         if (!prevRef.current || !nextRef.current) return;
+
+    //         const navigationParams = swiper.params.navigation;
+    //         if (navigationParams && typeof navigationParams === "object") {
+    //           navigationParams.prevEl = prevRef.current;
+    //           navigationParams.nextEl = nextRef.current;
+    //         }
+
+    //         if (swiper.navigation) {
+    //           swiper.navigation.init();
+    //           swiper.navigation.update();
+    //         }
+    //       });
+    //     }}
+    //   >
+    //     {[...Array(6)].map((_, index) => (
+    //       <SwiperSlide key={index}>
+    //         <CollactionCard />
+    //       </SwiperSlide>
+    //     ))}
+    //   </Swiper>
+
+    //   {/* Pagination سفارشی */}
+    //   <div className="custom-pagination flex justify-center mt-4"></div>
+
+    //   {/* استایل‌های سفارشی */}
+
+    // </div>
   );
 };
 

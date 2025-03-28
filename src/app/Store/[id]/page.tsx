@@ -4,7 +4,7 @@ import InfoBar from "@/components/Templates/store/InfoBar";
 import Image from "next/image";
 import React from "react";
 
-async function getData(id: { id: string }) {
+async function getData(id: string) {
   try {
     const res = await fetch(`http://localhost:3000/api/Products/${id}`);
 

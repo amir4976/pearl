@@ -30,7 +30,7 @@ function RotationCircle() {
   return (
     <>
       <div
-        className={`absolute -bottom-20 ${style.animateIn} ${
+        className={` ${style.animateIn} ${
           !scroll ? style.fadeOut : ""
         }`}
       >
