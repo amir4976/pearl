@@ -1,12 +1,13 @@
 "use client";
-import { addToBasket, loadBasketFromStorage, removeFromBasket, updateBasket } from "@/Redux/slices/Basket";
+
+import {  loadBasketFromStorage, removeFromBasket, updateBasket } from "@/Redux/slices/Basket";
+
 import { RootState } from "@/Redux/Store";
 import { ArrowLeft, CloseSquare } from "iconsax-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-type Props = {};
 
 interface BasketItem {
   id: string;
@@ -16,11 +17,13 @@ interface BasketItem {
   name: string;
 }
 
-function Page({}: Props) {
-  const [basket, setBasket] = React.useState<BasketItem[]>([]);
 
+function Page() {
+  const [basket, setBasket] = React.useState<BasketItem[]>([]);
+    
   // load the basket and load the dispatch
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
+
   useEffect(() => {
     dispatch(loadBasketFromStorage());
   }, [dispatch]);
@@ -28,7 +31,7 @@ function Page({}: Props) {
   // load data from store and get in this page
   const basketData = useSelector((state: RootState) => state.Basket.basket);
   useEffect(() => {
-    setBasket(basketData);
+    return setBasket(basketData);
   }, [basketData]);
 
   const handleRemoveFromBasket = (productId: string) => {
