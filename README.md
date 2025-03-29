@@ -1,3 +1,11 @@
+# Pearl - Jewelry Store
+
+![Pearl Logo](./public/image/Group.png)  
+
+**An elegant and modern jewelry store built with Next.js, Tailwind CSS, Redux, and MongoDB.**
+
+## 🚀 Live Demo
+--soon
 
 ## 📌 Features
 - 🔹 **Modern UI/UX** with Tailwind CSS
@@ -7,6 +15,13 @@
 - 🎯 **State management with Redux Toolkit**
 - 📱 **Fully responsive design**
 - 🔐 **User authentication and authorization**
+
+## 🏗️ Tech Stack
+- **Frontend:** Next.js, React, Tailwind CSS
+- **State Management:** Redux Toolkit
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** NextAuth.js / JWT
 
 ## 🛠️ Installation & Setup
 ### 1️⃣ Clone the repository:
