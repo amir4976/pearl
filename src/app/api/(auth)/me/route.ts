@@ -17,7 +17,7 @@ export const GET = async (req: Request) => {
     return new Response("Unauthorized", { status: 401 });
   }
   console.log('call ')
-  const user = await User.findOne({ email: isValidToken.email },'name email userName');
+  const user = await User.findOne({ email: isValidToken.email },'name email userName , role');
   if (!user) {
     return new Response("Unauthorized", { status: 401 });
   }

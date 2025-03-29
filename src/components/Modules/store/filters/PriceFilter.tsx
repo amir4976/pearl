@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import style from "./PriceFilter.module.css";
+import FlipTextButton from "../../global/AnimateBtn/AnimateBtn";
+import { Filter } from "iconsax-react";
 interface PriceFilterProps {
   min: number;
   max: number;
@@ -58,12 +60,9 @@ const PriceFilter =({ min, max, onFilter }: PriceFilterProps) => {
         <span className="font-bold"> {maxPrice.toLocaleString()} تومان</span>
       </p>
 
-      <button
-        className="bg-yellow-400 text-black py-2 px-4 rounded mt-3 w-full"
-        onClick={() => onFilter(minPrice, maxPrice)}
-      >
-        فیلتر
-      </button>
+      <div className=" mt-5" onClick={() => onFilter(minPrice, maxPrice)}>
+        <FlipTextButton primaryText="فیلتر" secondaryText={<Filter size="24" color="#000"/>} />
+      </div>
     </div>
   );
 };

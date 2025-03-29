@@ -4,6 +4,7 @@
 
 :root {
   --mainThemeColor: #f3d098;
+  --PannelBg :#222222;
 }
 
 body {
@@ -120,8 +121,11 @@ body {
 
 
 
-
-
+:root[class~="dark"] div:where(.swal2-container) div:where(.swal2-popup){
+  background-color: #353434;
+  z-index: 1;
+  border: 1px solid #666666;
+}
 
 
 @layer base {

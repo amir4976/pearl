@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchUser } from "@/Redux/slices/UserAuth";
 import { RootState } from "@/Redux/Store";
+
 function Navbar() {
   const [scroll, setScroll] = React.useState(false);
   const [isShowBasketDrawer, setIsShowBasketDrawer] = React.useState(false);
@@ -18,19 +19,19 @@ function Navbar() {
   const isUserLoggedIn = useSelector(
     (state: RootState) => state.LoginSlice.isLogin
   );
+
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScroll(window.scrollY > 100);
+      setScroll(window.scrollY > 150);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  console.log(isUserLoggedIn);
   return (
     <>
       {scroll && (
@@ -80,7 +81,11 @@ function Navbar() {
             </Link>
           ) : (
             <Link
-              href="/myAccount"
+              href={
+                user?.role == "ADMIN"
+                  ? "PAdmin"
+                  :  "myAccount"
+              }
               className="px-3 py-2 border border-MainColor text-MainColor rounded-sm"
             >
               {user?.userName} خوش امدید

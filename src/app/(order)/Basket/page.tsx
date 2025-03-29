@@ -1,11 +1,14 @@
 "use client";
+
 import {  loadBasketFromStorage, removeFromBasket, updateBasket } from "@/Redux/slices/Basket";
+
 import { RootState } from "@/Redux/Store";
 import { ArrowLeft, CloseSquare } from "iconsax-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+
 interface BasketItem {
   id: string;
   image: string;
@@ -14,11 +17,13 @@ interface BasketItem {
   name: string;
 }
 
+
 function Page() {
   const [basket, setBasket] = React.useState<BasketItem[]>([]);
     
   // load the basket and load the dispatch
   const dispatch = useDispatch();  
+
   useEffect(() => {
     dispatch(loadBasketFromStorage());
   }, [dispatch]);
