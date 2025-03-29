@@ -35,17 +35,17 @@ export const DELETE = async (
   try {
     const productID = params.params.id;
     // get id from here
-    console.log(productID);
-    const isInFavorites = await Favorites.findOne({
-      _id: productID,
-    });
 
+    const isInFavorites = await Favorites.findOne({
+      product: productID,
+    });
+    
     if (!isInFavorites) {
       return new Response(JSON.stringify("not found"), { status: 400 });
     }
 
     await Favorites.findOneAndDelete({
-      _id: productID,
+      product: productID,
     });
 
     return new Response(JSON.stringify("deleted"), { status: 200 });

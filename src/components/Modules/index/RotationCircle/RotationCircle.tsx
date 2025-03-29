@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowCircleDown } from "iconsax-react";
+import { ArrowDown } from "iconsax-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import style from "./Circle.module.css"; // Assuming you have some existing CSS module styles
@@ -30,9 +30,9 @@ function RotationCircle() {
   return (
     <>
       <div
-        className={`absolute -bottom-20 ${style.animateIn} ${
+        className={` ${style.animateIn} ${
           !scroll ? style.fadeOut : ""
-        }`}
+        } flex justify-center items-center `}
       >
         <Image
           className="animate-[spin_10s_linear_infinite]"
@@ -41,6 +41,9 @@ function RotationCircle() {
           width={200}
           height={200}
         />
+        <div className=" absolute">
+          <ArrowDown size="32" color="#FF8A65" />
+        </div>
       </div>
     </>
   );

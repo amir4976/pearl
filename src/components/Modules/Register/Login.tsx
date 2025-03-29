@@ -35,7 +35,7 @@ function Login() {
     if (fatchHandler.status === 200) {
       const data = await fatchHandler.json();
       if (data?.role === "ADMIN") {
-        router.push("/P-admin");
+        router.push("/PAdmin");
       } else {
         router.push("/myAccount");
       }

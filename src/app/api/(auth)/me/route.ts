@@ -2,7 +2,9 @@ import ConnectToDb from "@/utils/ConnectToDb";
 import { cookies } from "next/headers";
 import jwt,{JwtPayload} from "jsonwebtoken";
 import User from "@/models/User";
-export const GET = async (req: Request) => {
+
+
+export const GET = async () => {
   await ConnectToDb();
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;

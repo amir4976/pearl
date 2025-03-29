@@ -1,0 +1,34 @@
+.before-cover::before {
+    content: '';
+    width: 500px;
+    height: 700px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 100%;
+    filter: blur(100px); /* می‌توانید این را برای تست حذف کنید */
+    opacity: 0.6; /* می‌توانید این را برای تست حذف کنید */
+    animation: bgChanger 10s linear infinite;
+    background-color: #f3d098; /* مقدار پیش‌فرض رنگ */
+}
+
+@keyframes bgChanger {
+    0% {
+        background-color: #f3d098; /* رنگ اصلی سایت */
+    }
+    20% {
+        background-color: #a8d0e6; /* رنگ آبی ملایم (آرامش‌بخش) */
+    }
+    40% {
+        background-color: #d4e157; /* رنگ سبز ملایم (طبیعی و آرامش‌بخش) */
+    }
+    60% {
+        background-color: #b39ddb; /* رنگ بنفش ملایم (آرامش‌بخش) */
+    }
+    80% {
+        background-color: #ffb6b9; /* رنگ صورتی ملایم (آرامش‌بخش و نرم) */
+    }
+    100% {
+        background-color: #f3d098; /* رنگ پس‌زمینه پنل اصلی سایت */
+    }
+}

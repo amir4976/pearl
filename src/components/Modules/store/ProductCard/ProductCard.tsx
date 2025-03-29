@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import FlipTextButton from "../../global/AnimateBtn/AnimateBtn";
-import { SearchNormal, ShoppingCart } from "iconsax-react";
+import { SearchNormal } from "iconsax-react";
 import style from "./ProductCard.module.css";
 import InfoModal from "../../index/InfoModal/InfoModal";
 import Link from "next/link";
@@ -14,10 +13,11 @@ type Props = {
     name: string;
     price: number;
     image: string;
-    description: string;
-    category: string;
+    shortDescription: string;
+    category: [string];
     brand: string;
-    color: string;
+    color: [{ name: string; hexCode: string }];
+    tags: [{ name: string; type: string }];
     status: string;
     offer: number;
   };
@@ -27,7 +27,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
   const [isClient, setIsClient] = useState(false);
-
+  console.log(product)
   useEffect(() => {
     setIsClient(true);
   }, []);

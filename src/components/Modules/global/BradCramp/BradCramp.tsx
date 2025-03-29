@@ -13,7 +13,8 @@ const breadcrumbLabels: Record<string, string> = {
   myAccount: "حساب کاربری من",
   Store: "فروشگاه",
   favorits:"علاقه مندی ها",
-  PAdmin:'پنل ادمین'
+  PAdmin:'پنل ادمین',
+  Products:"محصولات"
 };
 
 const Breadcrumbs = () => {
@@ -24,9 +25,7 @@ const Breadcrumbs = () => {
     <>
       <div className="my-7 mx-3">
         <div className="text-5xl font-DBOLD ">
-          {pathSegments.map((segment, index) => {
-            return <p key={index}>{breadcrumbLabels[segment] || segment}</p>;
-          })}
+        {breadcrumbLabels[pathSegments[pathSegments.length - 1]] || pathSegments[pathSegments.length - 1] || "خانه"}
         </div>
         <nav aria-label="breadcrumb">
           <ul className="flex space-x-2 rtl:flex-row-reverse">

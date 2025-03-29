@@ -1,52 +1,142 @@
-import AvatarGroup4 from "@/components/Modules/global/AvatarGroupe/AvatarGroupe";
-import Btn from "@/components/Modules/global/btn/Btn";
+"use client";
 import RotationCircle from "@/components/Modules/index/RotationCircle/RotationCircle";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 function Landing() {
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-full flex  mt-36 justify-center">
-        <div className="max-w-6xl  flex gap-10  max-md:flex-col max-xl:px-5" >
-          <div className="w-4/12  max-md:w-full flex justify-center ">
-            <div className=" flex flex-col gap-5">
-              <p className="text-2xl font-DM py-3">
-                ما جواهرات را بر اساس زندگی شما میسازیم
-              </p>
-              <p className="text-4xl font-DB text-MainColor">
-                قصه خودتان را برای ما <br /> تعریف کنید <br /> تا ما آن را به جواهر تبدیل
-                کنیم.
-              </p>
-              <p className="text-md font-DM">
-                ما برآنیم که با ارائه بهترین محصولات به مشتریان گرامی خود، پاسخ
-                اعتماد شما بزرگواران را به بهترین صورت داده باشیم. و از شما
-                عالیجنابان و مشتریان گرامی که در واقع مالکان حقیقی این برند
-                هستید.
-              </p>
-              <span className="w-full text-left font-DM">نظرات مشتریان ما</span>
+    <>
+      <div className="h-[600px] w-full grid md:grid-cols-2 grid-cols-1 max-md:h-fit items-center mt-16">
+        {/* Section 1 - Images */}
+        <div className="col-span-1 flex items-end justify-center gap-5 relative">
+          {/* Floating Star */}
+          <motion.div
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: [0, -10, 0], opacity: 1 }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay:3 }}
+            className="absolute top-10 left-52"
+          >
+            <Image src="/image/star.svg" width={50} height={50} alt="star" />
+          </motion.div>
 
-              <Btn title="بیشتر بدانید" link="/about" />
-              <div className="">
-                <AvatarGroup4 />
+          {/* Main Image */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut",delay:3 }}
+            className="w-[300px] h-[600px] rounded-full overflow-hidden flex justify-center items-center"
+          >
+            <Image
+              src="/cover/1155fa4fe9d110d98d4a118359ad4a20.jpg"
+              alt="landing"
+              width={1920}
+              height={1080}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+
+          {/* Side Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2,  delay:3.5 }}
+            className="w-[200px] h-[350px] custom-rounded mb-10 overflow-hidden"
+          >
+            <Image
+              src="/cover/e08341166fca31bb54b8244b6c320938.jpg"
+              alt="landing"
+              width={1920}
+              height={1080}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </div>
+
+        {/* Section 2 - Text Content */}
+        <div className="col-span-1">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 , delay:3}}
+            className="flex flex-col gap-5 items-center text-center h-full mt-10"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut" ,delay:3}}
+              className="font-DM text-center text-lg"
+            >
+              <motion.span whileHover={{ scale: 1.1 }}>
+                ما جواهرات را بر اساس زندگی شما می‌سازیم
+              </motion.span>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5, delay: 3.3 }}
+              className="font-Dorna text-center text-4xl text-MainColor flex flex-col"
+            >
+              <motion.span whileHover={{ scale: 1.05 }}>
+                قصه خودتان را برای ما تعریف کنید
+              </motion.span>
+              <div className="flex mt-1 items-center">
+                <motion.span whileHover={{ scale: 1.05 }}>تا ما آن را به</motion.span>
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.8, delay: 3.6 }}
+                  whileHover={{ rotate: 10 }}
+                  className="w-44 mx-2 bg-MainColor h-12 rounded-full overflow-hidden hidden xl:block"
+                >
+                  <Image
+                    src="/cover/Blue Nile round diamond engagement ring..jpeg"
+                    width={100}
+                    height={100}
+                    alt="ring"
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                <motion.span whileHover={{ scale: 1.05 }}>جواهر تبدیل کنیم</motion.span>
               </div>
-            </div>
-          </div>
-          <div className="w-7/12  max-md:hidden ">
-            <div className="w-full">
-              <Image
-                src={"/image/Group-46-1024x836.webp"}
-                alt="landing"
-                width={700}
-                height={700}
-              />
-            </div>
-          </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: 3.5 }}
+              whileHover={{ scale: 1.05 }}
+              className="text-lg"
+            >
+              ما برآنیم که با ارائه بهترین محصولات به مشتریان گرامی خود، پاسخ
+              اعتماد شما را به بهترین صورت داده باشیم.
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 3.7 }}
+              className="flex justify-between w-full mt-10 max-md:hidden"
+            >
+              <RotationCircle />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.3, delay: 3.8 }}
+                className="border-r border-MainColor w-full text-right text-sm p-2"
+              >
+                <motion.p whileHover={{ scale: 1.02 }}>
+                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
+                  با استفاده از طراحان گرافیک است.
+                </motion.p>
+                <div className="text-left px-3">مشتری</div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
-
-      <RotationCircle />
-    </div>
+    </>
   );
 }
 

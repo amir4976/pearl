@@ -20,6 +20,11 @@ export const POST = async (request: Request) => {
     const isProduct = await product.findOne({
       _id: new mongoose.Types.ObjectId(productId),
     });
+    
+
+
+
+
 
     // check if the product is exist 
     if (!isProduct) {
@@ -47,14 +52,25 @@ export const POST = async (request: Request) => {
     });
 
 
-   
 
-  const update =  await product.findOneAndUpdate(
+
+   await product.findOneAndUpdate(
     { _id: isProduct._id },
     { $push: { Comments: newComment._id } }, // مستقیماً آی‌دی را اضافه کن
     { new: true } // تا مقدار جدید را برگرداند
   );
-    console.log(update)
+
+  console.log((isProduct.rate + rate) / 2)
+
+  await product.findOneAndUpdate(
+    { _id: isProduct._id },
+    { rate:Math.round((isProduct.rate + rate )/ 2)}, // مستقیماً آی‌دی را اضافه کن
+    { new: true } // تا مقدار جدید را برگرداند
+  );
+  
+
+
+
     return Response.json({ message: "success" }, { status: 201 });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {

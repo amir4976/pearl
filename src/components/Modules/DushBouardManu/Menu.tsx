@@ -1,22 +1,24 @@
 "use client";
-import { url } from "inspector";
+
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 
+interface MenuProps {
+    title: string;
+    url: string;
+}
 
-function Menu({urls}:{urls:any}) {
-  const styles = {
-    Active: "bg-gray-500/25",
-  };
+function Menu({urls}:{urls:MenuProps[]}) {
   const pathname = usePathname();
+  console.log(urls)
 
   return (
     <div className="w-full border-l border-gray-700 h-fit p-7 font-DD  max-md:border-l-0 ">
       <div className="border-b p-3 border-gray-700">حساب کاربری من</div>
       <div className="p-4">
         <ul className="flex flex-col gap-1   transition-all  ">
-          {urls.map((url, index) => {
+          {urls.map((url:MenuProps, index:number) => {
             if (pathname === url.url) {
               return (
                 <Link

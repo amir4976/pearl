@@ -15,10 +15,10 @@ export const POST = async (req: Request) => {
   if (await User.findOne({ email })) {
     return Response.json("این ایمیل قبلا ثبت شده است", { status: 400 });
   }
-  
+
   const userToken = jwt.sign(
     { userName, email },
-    process.env.JWT_SECRET,
+    process.env.JWT_SECRET || "default_secret",
     {
       expiresIn: "1d",
     }

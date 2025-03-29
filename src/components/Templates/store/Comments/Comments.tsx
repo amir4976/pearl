@@ -1,6 +1,5 @@
 "use client";
 import CommentsRate from "@/components/Modules/store/Comments/CommentsRate";
-import getAllComments from "@/components/serverActions/getComments";
 import { Star1 } from "iconsax-react";
 import React, { useEffect } from "react";
 import Swal from "sweetalert2";
@@ -29,7 +28,7 @@ function Comments({ productId }: { productId: string }) {
       setAllCommetns(allDatas.comments);
     };
     fetchData();
-  }, []);
+  }, [productId]);
 
   const submitHandler = async () => {
     if (!rate || !comment || !name || !email) {

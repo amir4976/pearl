@@ -1,12 +1,12 @@
 'use client'
 
 
-import {useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AccountLayout from "@/components/layout/AccountLayout";
 import DushBouardBtn from "@/components/Modules/Account/DushbouadBtn/DushBouardBtn";
-import { Heart, Location, Paperclip } from "iconsax-react";
+import { Heart, Location } from "iconsax-react";
 import { LayoutDashboard, ListCheck, LogOutIcon, UserCircle } from "lucide-react";
-import React, { useEffect } from "react";
+import React  from "react";
 import { RootState } from "@/Redux/Store";
 
 

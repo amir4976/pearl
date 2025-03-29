@@ -2,12 +2,14 @@
 import Image from "next/image";
 import React from "react";
 import style from "./LastestProductCard.module.css";
-import { Bag, Eye } from "iconsax-react";
+import { Eye } from "iconsax-react";
 import InfoModal from "../InfoModal/InfoModal";
-import FlipTextButton from "../../global/AnimateBtn/AnimateBtn";
-type Props = {};
 
-function LastestProductCard({ cover, title, offer, price }: Props) {
+import ProductOrder from "../../store/ProductOrder/ProductOrder";
+
+function LastestProductCard({ product }: { product: string }) {
+  const parsedProduct = JSON.parse(product);
+
   const [isHover, setIsHover] = React.useState(false);
   const [isShowModal, setIsShowModal] = React.useState<boolean>(false);
   return (
@@ -19,9 +21,9 @@ function LastestProductCard({ cover, title, offer, price }: Props) {
           onMouseLeave={() => setIsHover(false)}
         >
           <Image
-            src={"/image/tiffany-tt1-ring-67795121_1010332_ED-1.webp"}
-            className="w-full h-full  rounded-t-full "
-            alt={title}
+            src={parsedProduct.image}
+            className="w-full h-full  object-cover"
+            alt={parsedProduct.name}
             width={500}
             height={500}
           />
@@ -30,12 +32,16 @@ function LastestProductCard({ cover, title, offer, price }: Props) {
               isHover ? style.FadeOut : style.FadeIn
             }  `}
           >
-            <span className=" font-DM">انگشتر مدل 2</span>
-            <p className="font-DBOLD mb-5 text-MainColor">270,000 تومان</p>
+            <span className=" font-DM">{parsedProduct.name}</span>
+            <p className="font-DBOLD mb-5 text-MainColor">
+              {parsedProduct.price.toLocaleString()} تومان
+            </p>
             <div className="w-full  flex gap-3">
-              <FlipTextButton
-                primaryText="افزودن به سبد خرید"
-                secondaryText={<Bag size="32" color="#000" />}
+              <ProductOrder
+                name={parsedProduct.name}
+                id={parsedProduct._id}
+                price={parsedProduct.price}
+                image={parsedProduct.image}
               />
               <button className="p-2 " onClick={() => setIsShowModal(true)}>
                 <Eye size="22" color="#FF8A65" />
@@ -44,7 +50,9 @@ function LastestProductCard({ cover, title, offer, price }: Props) {
           </div>
         </div>
       </div>
-      {isShowModal && <InfoModal setIsShowModal={setIsShowModal} />}
+      {isShowModal && (
+        <InfoModal setIsShowModal={setIsShowModal} product={parsedProduct} />
+      )}
     </>
   );
 }

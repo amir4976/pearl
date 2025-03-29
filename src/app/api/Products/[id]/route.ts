@@ -1,5 +1,5 @@
 import ConnectToDb from "@/utils/ConnectToDb";
-import Product from "@/models/Product";
+import Product from "@/models/product";
 import { redirect } from "next/navigation";
 
 export const GET = async (request: Request, { params }: { params: { id: string } }) => {

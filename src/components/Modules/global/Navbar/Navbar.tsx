@@ -8,13 +8,13 @@ import BasketDrawer from "../BasketDrawer/BasketDrawer";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchUser } from "@/Redux/slices/UserAuth";
-import { RootState } from "@/Redux/Store";
+import { AppDispatch, RootState } from "@/Redux/Store";
 
 function Navbar() {
   const [scroll, setScroll] = React.useState(false);
   const [isShowBasketDrawer, setIsShowBasketDrawer] = React.useState(false);
   const [isShowMenuDrawer, setIsShowMenuDrawer] = React.useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.LoginSlice.user);
   const isUserLoggedIn = useSelector(
     (state: RootState) => state.LoginSlice.isLogin
@@ -39,7 +39,7 @@ function Navbar() {
       )}
 
       <div
-        className={`w-full sticky top-0 transition-all flex justify-between items-center font-DR text-sm z-50 max-md:px-5 ${
+        className={`w-full sticky top-0 transition-all flex justify-between items-center font-DR text-sm z-40 max-md:px-5 ${
           scroll ? "h-20" : "h-24"
         }`}
       >
@@ -53,8 +53,12 @@ function Navbar() {
 
         {/* Navigation Links (Hidden on Mobile) */}
         <ul className="gap-4 hidden md:flex">
-          <li><Link href={'/'}>صفحه اصلی</Link></li>
-          <li><Link href={'/Store'}>فروشگاه</Link></li>
+          <li>
+            <Link href={"/"}>صفحه اصلی</Link>
+          </li>
+          <li>
+            <Link href={"/Store"}>فروشگاه</Link>
+          </li>
           <li>تماس با ما</li>
           <li>درباره ما</li>
         </ul>
@@ -81,11 +85,7 @@ function Navbar() {
             </Link>
           ) : (
             <Link
-              href={
-                user?.role == "ADMIN"
-                  ? "PAdmin"
-                  :  "myAccount"
-              }
+              href={user?.role == "ADMIN" ? "PAdmin" : "myAccount"}
               className="px-3 py-2 border border-MainColor text-MainColor rounded-sm"
             >
               {user?.userName} خوش امدید

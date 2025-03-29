@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    white-space: nowrap;
+    border: 1px solid var(--mainThemeColor);
+    color: var(--mainThemeColor);
+    padding: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.marquee-content {
+    display: flex;
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.marquee-content div {
+    color: var(--mainThemeColor);
+    font-size:20px;
+    padding: 0 20px;
+    font-family: var(--font-dorna);
+}

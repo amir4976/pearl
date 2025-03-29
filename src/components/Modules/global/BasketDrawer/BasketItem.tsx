@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { CloseCircle } from "iconsax-react";
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { loadBasketFromStorage, removeFromBasket } from "@/Redux/slices/Basket";
-import { RootState } from "@/Redux/Store";
+
 type Props = {
   item: {
     id: string;
@@ -14,10 +14,18 @@ type Props = {
     image: string;
     quantity: number;
   };
-  setBasketItems: (items: any[]) => void;
+  setBasketItems: (items:BasketProps) => void;
 };
 
-
+type BasketProps ={
+  item: {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+    quantity: number;
+  };
+}
 
 function BasketItem({ item, setBasketItems }: Props) {
 
@@ -53,10 +61,11 @@ function BasketItem({ item, setBasketItems }: Props) {
         if (updatedBasket) {
            dispath(removeFromBasket(itemId));
            const updatedBasket = JSON.parse(localStorage.getItem("basket")||"{}");
+           
            if(updatedBasket){
              setBasketItems(updatedBasket)
            }else{
-            setBasketItems([])
+            // setBasketItems([])
            }
           Swal.fire(
             {

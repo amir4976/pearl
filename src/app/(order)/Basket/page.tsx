@@ -2,12 +2,15 @@
 
 import {  loadBasketFromStorage, removeFromBasket, updateBasket } from "@/Redux/slices/Basket";
 
+
 import { RootState } from "@/Redux/Store";
 import { ArrowLeft, CloseSquare } from "iconsax-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+
+
 
 interface BasketItem {
   id: string;
@@ -16,6 +19,8 @@ interface BasketItem {
   quantity: number;
   name: string;
 }
+
+
 
 
 function Page() {

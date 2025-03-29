@@ -49,3 +49,49 @@ export const pUserLink = [
     },
   ];
 
+
+  export const collaction = [
+    {
+      title: 'کالکشن الماس',
+      image: '/cover/camilla-carvalho-Y9dcQpOIMHQ-unsplash.jpg',
+      link: '',
+      subtitle: 'برترین الماس‌ها برای جذاب‌ترین لحظات شما'
+    },
+    {
+      title: 'کالکشن طلا و جواهرات لوکس',
+      image: '/cover/jasmin-chew-UBeNYvk6ED0-unsplash.jpg',
+      link: '',
+      subtitle: 'جواهرات طلای با کیفیت عالی و طراحی فوق‌العاده'
+    },
+    {
+      title: 'کالکشن جواهرات زنانه',
+      image: '/cover/vinicius-amnx-amano-Sb0Id4mBWxg-unsplash.jpg',
+      link: '',
+      subtitle: 'انتخابی شیک برای خانم‌های با سلیقه'
+    },
+    {
+      title: 'کالکشن حلقه‌های خاص',
+      image: '/cover/chuttersnap-NYqEk7a42yc-unsplash.jpg',
+      link: '',
+      subtitle: 'حلقه‌های طراحی شده برای لحظات خاص شما'
+    },
+    {
+      title: 'کالکشن زیورآلات مردانه',
+      image: '/cover/jonas-jaeken-6D5dbP3dO0o-unsplash.jpg',
+      link: '',
+      subtitle: 'زیورآلات مردانه با طراحی مدرن و شیک'
+    },
+    {
+      title: 'کالکشن گردنبند و آویز',
+      image: '/cover/kateryna-hliznitsova-FjfqwnC04vQ-unsplash.jpg',
+      link: '',
+      subtitle: 'گردنبندها و آویزهای جذاب و خاص برای هر موقعیت'
+    },
+    {
+      title: 'کالکشن ست‌های جواهرات',
+      image: '/cover/kateryna-hliznitsova-EnvGlhMhFrc-unsplash.jpg',
+      link: '',
+      subtitle: 'ست‌های جواهرات برای تکمیل استایل شما'
+    },
+  ];
+  
