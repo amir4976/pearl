@@ -53,7 +53,7 @@ export const pUserLink = [
   export const collaction = [
     {
       title: 'کالکشن الماس',
-      image: '/cover/max-ducourneau-6uv43p1ePrk-unsplash.jpg',
+      image: '/cover/camilla-carvalho-Y9dcQpOIMHQ-unsplash.jpg',
       link: '',
       subtitle: 'برترین الماس‌ها برای جذاب‌ترین لحظات شما'
     },
@@ -77,13 +77,13 @@ export const pUserLink = [
     },
     {
       title: 'کالکشن زیورآلات مردانه',
-      image: '/cover/acb322876b4673f5d5be8a8d38df799a.jpg',
+      image: '/cover/jonas-jaeken-6D5dbP3dO0o-unsplash.jpg',
       link: '',
       subtitle: 'زیورآلات مردانه با طراحی مدرن و شیک'
     },
     {
       title: 'کالکشن گردنبند و آویز',
-      image: '/cover/kateryna-hliznitsova-vbnxgxj6cJg-unsplash.jpg',
+      image: '/cover/kateryna-hliznitsova-FjfqwnC04vQ-unsplash.jpg',
       link: '',
       subtitle: 'گردنبندها و آویزهای جذاب و خاص برای هر موقعیت'
     },

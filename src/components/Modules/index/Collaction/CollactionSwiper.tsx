@@ -46,54 +46,6 @@ const CollSwiper: React.FC= () => {
       `}</style>
     </>
 
-    // <div className="relative w-full p-5">
-
-    //   {/* Swiper */}
-    //   <Swiper
-    //     modules={[Navigation, Pagination]}
-    //     spaceBetween={20}
-    //     slidesPerView={4}
-    //     breakpoints={{
-    //       300: { slidesPerView: 1 },
-    //       500: { slidesPerView: 2 },
-    //       800: { slidesPerView: 3 },
-    //       1000: { slidesPerView: 4 },
-    //     }}
-    //     loop={true}
-    //     navigation={true} // ✅ مقداردهی صحیح بدون نیاز به `as any`
-    //     pagination={{ clickable: true, el: ".custom-pagination" }}
-    //     onSwiper={(swiper) => {
-    //       swiperRef.current = swiper;
-
-    //       setTimeout(() => {
-    //         if (!prevRef.current || !nextRef.current) return;
-
-    //         const navigationParams = swiper.params.navigation;
-    //         if (navigationParams && typeof navigationParams === "object") {
-    //           navigationParams.prevEl = prevRef.current;
-    //           navigationParams.nextEl = nextRef.current;
-    //         }
-
-    //         if (swiper.navigation) {
-    //           swiper.navigation.init();
-    //           swiper.navigation.update();
-    //         }
-    //       });
-    //     }}
-    //   >
-    //     {[...Array(6)].map((_, index) => (
-    //       <SwiperSlide key={index}>
-    //         <CollactionCard />
-    //       </SwiperSlide>
-    //     ))}
-    //   </Swiper>
-
-    //   {/* Pagination سفارشی */}
-    //   <div className="custom-pagination flex justify-center mt-4"></div>
-
-    //   {/* استایل‌های سفارشی */}
-
-    // </div>
   );
 };
 

@@ -6,11 +6,19 @@ import { useDispatch } from "react-redux";
 import { addToBasket, loadBasketFromStorage } from "@/Redux/slices/Basket";
 import Swal from "sweetalert2";
 type Props = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
   isCounter?: boolean;
+};
+
+type basket = {
+  id: string;
+  image: string;
+  name: string;
+  price: number;
+  quantity: number;
 };
 
 function ProductOrder({ name, id, price, image, isCounter }: Props) {
@@ -27,14 +35,14 @@ function ProductOrder({ name, id, price, image, isCounter }: Props) {
       const savedBasket = localStorage.getItem("basket");
       if (savedBasket) {
         const basketItems = JSON.parse(savedBasket);
-        const isInBasket = basketItems.some((item) => item.id === id);
+        const isInBasket = basketItems.some((item: basket) => item.id === id);
         setIsInBasket(isInBasket);
       }
     }
   }, [id]);
 
   // handle add to cart
-  const addToCart = async (e) => {
+  const addToCart = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     const CartItems = {
       id,
@@ -44,7 +52,7 @@ function ProductOrder({ name, id, price, image, isCounter }: Props) {
       quantity: counter,
     };
     // first load the basket from local storage
-    dispatch(loadBasketFromStorage())
+    dispatch(loadBasketFromStorage());
     // and then add the product to the basket
     dispatch(addToBasket(CartItems));
     setIsInBasket(true);
@@ -85,7 +93,7 @@ function ProductOrder({ name, id, price, image, isCounter }: Props) {
           موجود در سبد خرید
         </button>
       ) : (
-        <div className="w-full" onClick={(e) => addToCart(e)}>
+        <div className="w-full" onClick={addToCart}>
           <FlipTextButton
             primaryText="افزودن به سبد خرید"
             secondaryText={<Bag size="32" color="#000" />}

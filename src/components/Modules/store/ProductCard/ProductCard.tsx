@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import FlipTextButton from "../../global/AnimateBtn/AnimateBtn";
-import { SearchNormal, ShoppingCart } from "iconsax-react";
+import { SearchNormal } from "iconsax-react";
 import style from "./ProductCard.module.css";
 import InfoModal from "../../index/InfoModal/InfoModal";
 import Link from "next/link";

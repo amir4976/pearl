@@ -1,14 +1,15 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import FlipTextButton from "../../global/AnimateBtn/AnimateBtn";
-import { Bag, CloseCircle } from "iconsax-react";
+import { CloseCircle } from "iconsax-react";
 import style from "./infoModal.module.css";
+import ProductOrder from "../../store/ProductOrder/ProductOrder";
 
 // Define the props structure for the InfoModal component
 interface InfoModalProps {
   setIsShowModal: React.Dispatch<React.SetStateAction<boolean>>; // Function to toggle modal visibility
   product: {
+    _id: string;
     name: string;
     price: number;
     image: string;
@@ -25,7 +26,7 @@ interface InfoModalProps {
 // InfoModal component
 const InfoModal: React.FC<InfoModalProps> = ({ setIsShowModal, product }) => {
   const [counter, setCounter] = React.useState<number>(1);
-  const [selectedColor, setSelectedColor] =React.useState<string>();
+  const [selectedColor, setSelectedColor] = React.useState<string>();
   // Prevent counter from going below 1
   if (counter < 1) {
     setCounter(1);
@@ -105,7 +106,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ setIsShowModal, product }) => {
           </div>
 
           {/* Quantity Selector & Add to Cart Button */}
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             <div className="counter border border-gray-500 rounded-full flex">
               <button
                 className="p-2 border-l"
@@ -125,7 +126,14 @@ const InfoModal: React.FC<InfoModalProps> = ({ setIsShowModal, product }) => {
               primaryText="افزودن به سبد خرید"
               secondaryText={<Bag size="32" color="#000" />}
             />
-          </div>
+          </div> */}
+          <ProductOrder
+            name={product.name}
+            id={product._id}
+            price={product.price}
+            image={product.image}
+            isCounter={true}
+          />
 
           <hr className="border-gray-500" />
 

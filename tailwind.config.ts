@@ -77,6 +77,9 @@ const config: Config = {
   			],
 			Dorna:[
 				'var(--font-dorna)'
+			],
+			Bizan:[
+				'var(--font-bizan)'
 			]
   		},
   		borderRadius: {

@@ -39,7 +39,7 @@ function Navbar() {
       )}
 
       <div
-        className={`w-full sticky top-0 transition-all flex justify-between items-center font-DR text-sm z-50 max-md:px-5 ${
+        className={`w-full sticky top-0 transition-all flex justify-between items-center font-DR text-sm z-40 max-md:px-5 ${
           scroll ? "h-20" : "h-24"
         }`}
       >
