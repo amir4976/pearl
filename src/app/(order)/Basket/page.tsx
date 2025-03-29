@@ -16,8 +16,8 @@ interface BasketItem {
   quantity: number;
   name: string;
 }
- 
-   
+
+
 function Page() {
   const [basket, setBasket] = React.useState<BasketItem[]>([]);
     
