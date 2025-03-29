@@ -1,5 +1,5 @@
 "use client";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 import React, { useRef } from "react";
 
 type ScrollTypingTextProps = {
@@ -8,6 +8,8 @@ type ScrollTypingTextProps = {
 
 const ScrollTypingText: React.FC<ScrollTypingTextProps> = ({ text }) => {
   const container = useRef<HTMLParagraphElement>(null);
+
+  // Type scrollYProgress as MotionValue
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start 0.9", "start 0.25"],
@@ -31,7 +33,7 @@ const ScrollTypingText: React.FC<ScrollTypingTextProps> = ({ text }) => {
 
 type WordProps = {
   children: string;
-  progress: any;
+  progress: MotionValue<number>; // Use MotionValue for progress
   range: [number, number];
 };
 
@@ -55,7 +57,7 @@ const Word: React.FC<WordProps> = ({ children, progress, range }) => {
 
 type CharProps = {
   children: string;
-  progress: any;
+  progress: MotionValue<number>; // Use MotionValue for progress
   range: [number, number];
 };
 
@@ -64,7 +66,7 @@ const Char: React.FC<CharProps> = ({ children, progress, range }) => {
   const color = useTransform(progress, range, ["#6b7280", "#f3d098"]);
   return (
     <span>
-      <motion.span style={{ opacity, color }} className="transition-all font-Bizan text-5xlx ">
+      <motion.span style={{ opacity, color }} className="transition-all font-Bizan text-2xl ">
         {children}
       </motion.span>
     </span>

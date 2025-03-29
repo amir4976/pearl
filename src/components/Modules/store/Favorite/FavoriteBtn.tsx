@@ -22,7 +22,7 @@ function FavoriteBtn({ id }: Props) {
       }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   const handleAddToFavorit =async () => {
         const requast = await fetch("/api/favorites",{

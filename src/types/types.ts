@@ -27,3 +27,16 @@ export interface ProductType {
   tags?: Tag[];
   offer: number;
 }
+
+export interface userType {
+  _id:string;
+  userName :string;
+  name:string;
+  lastName:string;
+  email:string;
+  password:string;
+  address:[],
+  favorites:[]
+  role:string;
+  refreshToken:string;
+}

@@ -5,7 +5,7 @@ import { SearchNormal } from "iconsax-react";
 import style from "./ProductCard.module.css";
 import InfoModal from "../../index/InfoModal/InfoModal";
 import Link from "next/link";
-import ProductOrder from "../ProductOrder/ProductOrder";
+import ProductOrder from "@/components/Modules/store/ProductOrder/ProductOrder";
 
 type Props = {
   product: {
@@ -27,7 +27,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  console.log(product)
+
   useEffect(() => {
     setIsClient(true);
   }, []);

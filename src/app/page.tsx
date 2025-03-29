@@ -1,4 +1,3 @@
-
 import React from "react";
 import Landing from "../components/Templates/index/Landing/Landing";
 import CallactionSwiper from "@/components/Templates/index/CallectionSwiper/CallactionSwiper";
@@ -7,29 +6,26 @@ import LastestProduct from "@/components/Templates/index/LastestProducts/Lastest
 import InfiniteMarquee from "@/components/Templates/index/marquee/Marquee";
 import ScrollRevealText from "@/components/Modules/index/WhatWeDo/WhatWeDo";
 
-
 export default function Home() {
- 
-
   return (
     <>
-        <div className="bg-before">
-          <Landing />
+      <div className="bg-before">
+        <Landing />
 
-          <InfiniteMarquee />
+        <InfiniteMarquee />
 
-          <CallactionSwiper />
-          <AboutUs />
-
+        <CallactionSwiper />
+        <AboutUs />
+        <div className="max-xl:hidden">
           <ScrollRevealText
             text={
               "we crafting unique pieces of jewelry made of the higest standard materials and diamond"
             }
           />
-
-          <LastestProduct />
         </div>
-  
+
+        <LastestProduct />
+      </div>
     </>
   );
 }

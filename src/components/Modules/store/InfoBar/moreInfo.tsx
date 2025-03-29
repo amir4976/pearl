@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-function MoreInfo({}: Props) {
+function MoreInfo() {
   return (
     <div>
       لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از

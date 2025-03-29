@@ -1,8 +1,8 @@
 import React from 'react'
 
-type Props = {}
 
-function ColorFilter({}: Props) {
+
+function ColorFilter() {
   return (
     <div className="w-full bg-black p-5 rounded-md shadow-black shadow-lg bg-inherit ">
             <div className="text-sm font-DD">فیلتر بر اساس برند</div>

@@ -1,14 +1,32 @@
 import product from "@/models/product";
 import { Edit, Trash } from "iconsax-react";
 import React from "react";
+type Product = {
+  _id: string; // ObjectId can be represented as a string in TypeScript
+  name: string;
+  longDescription: string;
+  shortDescription: string;
+  price: number;
+  stock: number;
+  category: string[]; // Array of strings for categories
+  image: string;
+  brand: { name: string; logo: string }[]; // Assuming each brand object has a name and logo
+  color: { colorName: string; colorCode: string }[]; // Assuming color objects have color name and code
+  tags: { tagName: string }[]; // Array of objects with tagName
+  offer: number; // Discount offer (percentage)
+  __v: number; // MongoDB version key
+  createdAt: string; // ISO 8601 date string
+  Comments: string[]; // Array of ObjectIds as strings
+  updatedAt: string; // ISO 8601 date string
+  rate: number; // Rating out of 5
+};
 
 type Props = {
-  products: any[];
+  products: Product[]; // Array of Product objects
 };
 
 function PanelProducts({ products }: Props) {
-   
-
+  console.log(products);
 
   return (
     <div className="bg-PannelBg p-3 rounded-md  min-h-96">
@@ -35,14 +53,14 @@ function PanelProducts({ products }: Props) {
               </tr>
             </thead>
             <tbody>
-              {
-                product.length === 0 && (
-                  <tr>
-                    <td colSpan={3}>محصولی برای نمایش وجود ندارد</td>
-                  </tr>)
-              }
-              {products.splice(0,5).map((product) => (
+              {product.length === 0 && (
+                <tr>
+                  <td colSpan={3}>محصولی برای نمایش وجود ندارد</td>
+                </tr>
+              )}
+              {products.slice(0, 5).map((product) => (
                 <ProductItem
+                  key={product._id}
                   title={product.name}
                   price={product.price}
                   id={product._id}
@@ -59,11 +77,10 @@ function PanelProducts({ products }: Props) {
 export function ProductItem({
   title,
   price,
-  id,
 }: {
   title: string;
   price: number;
-  id: number;
+  id: string;
 }) {
   return (
     <tr className="my-2 odd:bg-[#32364a] even:bg-PannelBg rounded-md">

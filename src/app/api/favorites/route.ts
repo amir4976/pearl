@@ -18,7 +18,7 @@ export const GET = async () => {
   }
 };
 
-export const POST = async (req) => {
+export const POST = async (req:Request) => {
   ConnectToDb();
   try {
     const user = await authUser();
@@ -38,7 +38,7 @@ export const POST = async (req) => {
         { status: 400 }
       );
     }
-    const favorites = await Favorites.create({
+     await Favorites.create({
       user: user._id,
       product: body.productID,
     });

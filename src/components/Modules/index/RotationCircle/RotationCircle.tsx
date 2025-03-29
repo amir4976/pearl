@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowCircleDown, ArrowDown } from "iconsax-react";
+import { ArrowDown } from "iconsax-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import style from "./Circle.module.css"; // Assuming you have some existing CSS module styles

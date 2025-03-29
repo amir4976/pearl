@@ -8,11 +8,11 @@ import { Bag2, Ticket, User } from "iconsax-react";
 import { Users } from "lucide-react";
 import React from "react";
 import { authenthication } from "@/components/serverActions/authenthication.action";
-
+import { userType } from "@/types/types";
 async function page() {
   const allComments = await getAllComments();
   const allUsers = await getAllUsers();
-  const allAdmins = allUsers.filter((user: any) => user.role === "ADMIN");
+  const allAdmins = allUsers.filter((user: userType) => user.role === "ADMIN");
   const allProducts = await getAllProducts();
   authenthication();
 

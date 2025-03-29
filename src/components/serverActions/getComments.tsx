@@ -1,6 +1,6 @@
 'use server'
 
-import { ConnectToDb} from "@/utils/ConnectToDb";
+import ConnectToDb from "@/utils/ConnectToDb";
 import Comment from "@/models/Comments";
 
 
