@@ -33,14 +33,8 @@ function CommntsTable({ Comments }: { Comments: CommentType[] }) {
         <div className="flex justify-between items-center  border-b border-b-gray-500 pb-3  ">
           <div className="flex flex-col ">
             {" "}
-            <p className="font-DB  ">لیست محصولات</p>
-            <p className="text-sm text-gray-500">
-              برای مدیریت بهتر لطفا به صفحه محصولات مراجعه کنید
-            </p>
+            <p className="font-DB  ">لیست کامنت ها</p>
           </div>
-          <button className="p-2 bg-MainColor rounded-lg text-black">
-            بیشتر{" "}
-          </button>
         </div>
         <div className="w-full mt-3">
           <div className="table w-full">

@@ -13,12 +13,12 @@ const PriceFilter =({ min, max, onFilter }: PriceFilterProps) => {
   const [minPrice, setMinPrice] = useState(min);
   const [maxPrice, setMaxPrice] = useState(max);
 
-  const handleMinChange = (e) => {
+  const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     if (value <= maxPrice) setMinPrice(value);
   };
 
-  const handleMaxChange = (e) => {
+  const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     if (value >= minPrice) setMaxPrice(value);
   };

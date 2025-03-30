@@ -14,6 +14,7 @@ const breadcrumbLabels: Record<string, string> = {
   favorits: "علاقه مندی ها",
   PAdmin: "پنل ادمین",
   Products: "محصولات",
+  Comments: "کامنت ها",
 };
 
 const Breadcrumbs = () => {

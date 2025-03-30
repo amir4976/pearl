@@ -14,18 +14,16 @@ type Props = {
     image: string;
     quantity: number;
   };
-  setBasketItems: (items:BasketProps) => void;
+  setBasketItems: (items: BasketItemType[]) => void;
 };
 
-type BasketProps ={
-  item: {
-    id: string;
-    name: string;
-    price: number;
-    image: string;
-    quantity: number;
-  };
-}
+type BasketItemType = {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+};
 
 function BasketItem({ item, setBasketItems }: Props) {
 
