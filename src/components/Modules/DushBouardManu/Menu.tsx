@@ -11,7 +11,7 @@ interface MenuProps {
 
 function Menu({urls}:{urls:MenuProps[]}) {
   const pathname = usePathname();
-  console.log(urls)
+
 
   return (
     <div className="w-full border-l border-gray-700 h-fit p-7 font-DD  max-md:border-l-0 ">

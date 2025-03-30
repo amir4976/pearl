@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-
 const breadcrumbLabels: Record<string, string> = {
   home: "خانه",
   aboutus: "درباره ما",
@@ -12,20 +11,24 @@ const breadcrumbLabels: Record<string, string> = {
   Regeister: "ثبت نام",
   myAccount: "حساب کاربری من",
   Store: "فروشگاه",
-  favorits:"علاقه مندی ها",
-  PAdmin:'پنل ادمین',
-  Products:"محصولات"
+  favorits: "علاقه مندی ها",
+  PAdmin: "پنل ادمین",
+  Products: "محصولات",
 };
 
 const Breadcrumbs = () => {
   const pathname = usePathname();
-  const pathSegments = pathname.split("/").filter((segment) => segment);
-
+  const pathSegments = pathname
+    .split("/") // مسیر را به بخش‌های جداگانه تبدیل می‌کند
+    .filter((segment) => segment) // بخش‌های خالی را فیلتر می‌کند
+    .map((segment) => decodeURIComponent(segment.replace(/%20/g, " "))); // تبدیل درصد‌ها به فاصله و سایر کاراکترهای خاص
   return (
     <>
       <div className="my-7 mx-3">
         <div className="text-5xl font-DBOLD ">
-        {breadcrumbLabels[pathSegments[pathSegments.length - 1]] || pathSegments[pathSegments.length - 1] || "خانه"}
+          {breadcrumbLabels[pathSegments[pathSegments.length - 1]] ||
+            pathSegments[pathSegments.length - 1] ||
+            "خانه"}
         </div>
         <nav aria-label="breadcrumb">
           <ul className="flex space-x-2 rtl:flex-row-reverse">

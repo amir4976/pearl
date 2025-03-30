@@ -9,21 +9,11 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-
-
-
-interface BasketItem {
-  id: string;
-  image: string;
-  price: number;
-  quantity: number;
-  name: string;
-}
-
-
+import { BasketItem } from "@/types/types";
 
 
 function Page() {
+  // our main basket 
   const [basket, setBasket] = React.useState<BasketItem[]>([]);
     
   // load the basket and load the dispatch
@@ -33,11 +23,13 @@ function Page() {
     dispatch(loadBasketFromStorage());
   }, [dispatch]);
 
+
   // load data from store and get in this page
-  const basketData = useSelector((state: RootState) => state.Basket.basket);
+  const basketData: BasketItem[] = useSelector((state: RootState) => state.Basket.basket);
   useEffect(() => {
     return setBasket(basketData);
   }, [basketData]);
+
 
   const handleRemoveFromBasket = (productId: string) => {
     Swal.fire({
@@ -50,10 +42,10 @@ function Page() {
       color: "#fff",
     }).then((result) => {
       if (result.isConfirmed) {
+        // Remove the product from the basket
         const FiltredData = basketData.filter(
           (item: BasketItem) => item.id !== productId
         );
-
         dispatch(removeFromBasket(productId));
         setBasket(FiltredData);
       }
@@ -62,6 +54,7 @@ function Page() {
 
 
 const calculateTotalPrice = () => {
+  // we can calculte price  from here
   let totalPrice = 0;
   basketData.forEach((item: BasketItem) => {
     totalPrice += item.price * item.quantity;
@@ -69,9 +62,10 @@ const calculateTotalPrice = () => {
   return totalPrice.toLocaleString('fa-ir');
 }
 
+
+//  this one tack the quantity of product and add it to the basket
 const addMoreQuantity = (productId: string) => {
   const index = basket.findIndex((item) => item.id === productId);
-  
   if (index !== -1) {
     const updatedBasket = [...basket];
     updatedBasket[index] = {
@@ -87,6 +81,8 @@ const addMoreQuantity = (productId: string) => {
 };
 
 
+// well this one nearly tack me down :D
+// this one is decrease the quantity of product and if the quantity is 0 remove the product from the basket
 const decreaseQuantity = (productId: string) => {
   const index = basket.findIndex((item) => item.id === productId);
    
@@ -109,6 +105,7 @@ const decreaseQuantity = (productId: string) => {
 }
 
 
+// well if you dont undrestand this one so you should't have to be here :D
 const getQuantity = (productId: string) => {
   const item = basket.find((item) => item.id === productId);
   return item ? item.quantity : 0;

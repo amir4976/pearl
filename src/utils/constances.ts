@@ -6,23 +6,27 @@ export const pAdminLinks = [
     },
     {
       title: "محصولات",
-      url: "/admin/products",
+      url: "/PAdmin/Products",
     },
     {
       title: "دسته بندی ها",
-      url: "/admin/categories",
+      url: "/PAdmin/Categoris",
     },
     {
       title: "سفارش ها",
-      url: "/admin/orders",
+      url: "/PAdmin/orders",
     },
     {
       title: "کاربران",
-      url: "/admin/users",
+      url: "/PAdmin/Users",
+    },
+    {
+      title:'کامنت ها',
+      url:"/PAdmin/Comments",
     },
     {
       title: "تنظیمات",
-      url: "/admin/settings",
+      url: "/PAdmin/Settings",
     },
 ]
 

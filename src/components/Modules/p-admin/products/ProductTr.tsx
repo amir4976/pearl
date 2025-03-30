@@ -18,6 +18,7 @@ interface productProps {
   createdAt: string;
   updatedAt: string;
   rate: number;
+  lable:string;
 }
 function ProductTr({ product }: { product: string }) {
   const parsedProduct: productProps = JSON.parse(product);
@@ -34,7 +35,7 @@ function ProductTr({ product }: { product: string }) {
             <button className="p-2 bg-red-500 rounded-xl">
                 <Trash size={20}/>
             </button>
-            <Link href={`/PAdmin/Products/${parsedProduct._id}`} className="p-2 bg-MainColor text-black rounded-xl" >
+            <Link href={`/PAdmin/Products/${parsedProduct.name}`} className="p-2 bg-MainColor text-black rounded-xl" >
                 <Edit size={20}/>
             </Link>
         </td>

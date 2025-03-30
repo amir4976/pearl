@@ -40,3 +40,12 @@ export interface userType {
   role:string;
   refreshToken:string;
 }
+
+
+export interface BasketItem {
+  id: string;
+  image: string;
+  price: number;
+  quantity: number;
+  name: string;
+}

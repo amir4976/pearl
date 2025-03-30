@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { BasketItem } from "@/types/types";
 // Define the type for basket items
-type BasketItem = {
-  id: string; // Assuming the item has an `id` property, adjust accordingly
-  name: string;
-  price: number;
-  quantity: number; // Add any other properties relevant to your product
-};
 
 // Define the type for the state
 interface BasketState {
