@@ -49,3 +49,19 @@ export interface BasketItem {
   quantity: number;
   name: string;
 }
+
+
+export interface CommentType {
+  _id:string;
+  name:string;
+  email:string;
+  product:ProductType;
+  isAccsepted:boolean;
+  comment:string;
+  rate:number;
+  date:string;
+  createdAt:string;
+  updatedAt:string;
+  __v:number;
+
+}

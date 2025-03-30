@@ -1,11 +1,16 @@
-import React from 'react'
+import getAllComments from "@/components/serverActions/getAllComments.action";
+import CommentsTable from "@/components/Modules/p-admin/Comments/Commnts";
+import React from "react";
 
-type Props = {}
-
-function page({}: Props) {
+async function page() {
+  const allComments = await getAllComments();
   return (
-    <div>page</div>
-  )
+    <>
+      <CommentsTable
+        Comments={JSON.parse(JSON.stringify(allComments))}
+      />
+    </>
+  );
 }
 
-export default page
+export default page;

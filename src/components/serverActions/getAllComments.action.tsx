@@ -6,7 +6,7 @@ import Comment from "@/models/Comments";
 
 const getAllComments = async ()=>{
     ConnectToDb()
-    const comments =await Comment.find()
+    const comments =await Comment.find().populate("product")
     return comments
 }
 
