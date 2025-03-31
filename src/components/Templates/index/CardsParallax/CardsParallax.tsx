@@ -33,8 +33,8 @@ export default function CardsParallax() {
 
   return (
     <>
-      <main ref={container} className="relative mt-[50vh] cover-backGround2">
-        <div className="w-full text-center font-Dorna text-3xl text-MainColor">
+      <main ref={container} className="relative mt-[50vh]  cover-backGround2">
+        <div className="w-full text-center font-Dorna text-3xl text-MainColor max-md:mb-10">
           {" "}
           مشتریان ما چه میگویند
         </div>
