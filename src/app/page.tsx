@@ -5,6 +5,7 @@ import AboutUs from "@/components/Templates/index/aboutUs/AboutUs";
 import LastestProduct from "@/components/Templates/index/LastestProducts/LastestProduct";
 import InfiniteMarquee from "@/components/Templates/index/marquee/Marquee";
 import ScrollRevealText from "@/components/Modules/index/WhatWeDo/WhatWeDo";
+import CardsParallax from "@/components/Templates/index/CardsParallax/CardsParallax";
 
 export default function Home() {
   return (
@@ -16,6 +17,8 @@ export default function Home() {
 
         <CallactionSwiper />
         <AboutUs />
+        <CardsParallax />
+
         <div className="max-xl:hidden">
           <ScrollRevealText
             text={

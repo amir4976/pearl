@@ -1,9 +1,17 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
+// import Image from "next/image";
 import React from "react";
 import "./aboutUs.css";
+import Image from "next/image";
+import { AboutUsImages } from "@/utils/constances";
 
+interface AboutUsProps {
+  image: string;
+  role:string;
+  name:string;
+  index:number;
+}
 const AboutUs = () => {
   return (
     <motion.div
@@ -11,9 +19,9 @@ const AboutUs = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ once: true }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-2 my-44 "
+      className=" my-44 cover-backGround relative "
     >
-      <div className="col-span-1">
+      <div className="w-full">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -38,73 +46,44 @@ const AboutUs = () => {
           </div>
         </motion.div>
       </div>
-      <div className="col-span-1 flex justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="relative w-[450px] flex justify-center  before-cover"
-        >
-          <div className="relative h-[700px] w-[400px] overflow-hidden rounded-full ">
-            <Image
-              src="/cover/brooke-evans-qM23Rt6y_io-unsplash.jpg"
-              className="w-full h-full object-cover"
-              width={1080}
-              height={1080}
-              alt="about cover"
-            />
+      <div className="w-full flex gap-10 mt-10 max-md:flex-col max-md:items-center max-md:justify-center max-md:px-10">
+        {AboutUsImages.map((item, index) => (
+          <div key={index}>
+            <AboutUSCard image={item.image} name={item.name} role={item.role} index={index} />
           </div>
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="absolute left-0 top-0 h-[250px] w-[100px] overflow-hidden rounded-t-full rounded-l-full max-md:hidden"
-          >
-            <Image
-              src="/cover/brooke-cagle-kElEigko7PU-unsplash.jpg"
-              className="w-full h-full object-cover"
-              width={400}
-              height={400}
-              alt="about cover"
-            />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="absolute -right-0 bottom-0 h-[250px] w-[100px] overflow-hidden rounded-tr-full rounded-b-full max-md:hidden"
-          >
-            <Image
-              src="/cover/camilla-carvalho-Y9dcQpOIMHQ-unsplash.jpg"
-              className="w-full h-full object-cover"
-              width={400}
-              height={400}
-              alt="about cover"
-            />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 1,
-              delay: 0.5,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-            className="absolute right-10 top-10 h-[70px] w-[70px] overflow-hidden rounded-tr-full rounded-b-full max-md:hidden"
-          >
-            <Image
-              src="/image/star.svg"
-              className="w-full h-full object-cover"
-              width={50}
-              height={50}
-              alt="about cover"
-            />
-          </motion.div>
-        </motion.div>
+        ))}
       </div>
     </motion.div>
+  );
+};
+
+const AboutUSCard = ({image,name,role,index}: AboutUsProps) => {
+  console.log(image);
+  const [isHovered, setIsHovered] = React.useState(false);
+  return (
+    <>
+      <motion.div
+        whileInView={{ scale: 1, opacity: 1 }}
+        initial={{ scale: 0, opacity: 0 }}
+        transition={{ duration: 0.8, delay: index * 0.1 }}
+        className="mt-20 "
+
+      >
+        <div className="overflow-hidden rounded-full relative hover:scale-105 hover:rotate-6   transition-all" onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)}>
+            <div className={`${isHovered ? "flex" : "hidden"} text-MainColor font-Dorna  flex-col  absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center transition-all duration-300`}>
+             <span className="text-2xl">{name}</span>
+             <span>{role}</span>
+            </div>
+          <Image
+            src={image}
+            width={500}
+            height={600}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </motion.div>
+    </>
   );
 };
 

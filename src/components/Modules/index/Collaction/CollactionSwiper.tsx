@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import CollactionCard from "./CollactionCard";
 import { collaction } from "@/utils/constances";
 
@@ -12,7 +12,7 @@ const CollSwiper: React.FC= () => {
   return (
     <>
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination,Autoplay]}
         spaceBetween={20}
         slidesPerView={4}
         breakpoints={{
@@ -21,6 +21,7 @@ const CollSwiper: React.FC= () => {
           800: { slidesPerView: 3 },
           1000: { slidesPerView: 4 },
         }}
+        autoplay={true}
         loop={true}
         pagination={{ clickable: true, el: ".custom-pagination" }}
       >

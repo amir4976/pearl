@@ -12,6 +12,7 @@ body {
   background-color: #1a1a1a;
   color: #fff;
   overflow-x: hidden;
+  
 }
 
 @layer utilities {
@@ -214,4 +215,33 @@ body {
 
 .custom-rounded{
   border-radius: 100px 100px 0 150px;
+}
+
+.cover-backGround::before{
+  content: "";
+  width: 500px;
+  border-radius: 100%;
+  background-color: var(--mainThemeColor);
+  opacity: 0.5;
+  filter: blur(200px);
+  height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+   
+}
+.cover-backGround2::before{
+  content: "";
+  width: 500px;
+  border-radius: 100%;
+  background-color: var(--mainThemeColor);
+  opacity: 0.5;
+  filter: blur(200px);
+  height: 500px;
+  position: absolute;
+  top: 500px;
+  right: 0;
+  z-index: 0;
+   
 }
