@@ -23,8 +23,8 @@ const AboutUs = () => {
     >
       <div className="w-full">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
           className="w-full h-full flex items-center text-center justify-center flex-col "

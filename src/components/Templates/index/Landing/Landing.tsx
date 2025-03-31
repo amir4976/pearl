@@ -15,7 +15,7 @@ function Landing() {
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: [0, -10, 0], opacity: 1 }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay:3 }}
-            className="absolute top-10 left-52"
+            className="absolute top-10 left-52 max-md:left-10"
           >
             <Image src="/image/star.svg" width={50} height={50} alt="star" />
           </motion.div>
@@ -41,7 +41,7 @@ function Landing() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2,  delay:3.5 }}
-            className="w-[200px] h-[350px] custom-rounded mb-10 overflow-hidden"
+            className="w-[200px] h-[350px] custom-rounded mb-10 overflow-hidden max-md:hidden"
           >
             <Image
               src="/cover/e08341166fca31bb54b8244b6c320938.jpg"
@@ -71,12 +71,16 @@ function Landing() {
                 ما جواهرات را بر اساس زندگی شما می‌سازیم
               </motion.span>
             </motion.div>
-            
+            <div className="font-Dorna text-center text-4xl text-MainColor flex flex-col md:hidden">
+            قصه خودتان را برای ما تعریف کنید
+          تا ما آن را به
+          جواهر تبدیل کنیم
+            </div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.5, delay: 3.3 }}
-              className="font-Dorna text-center text-4xl text-MainColor flex flex-col"
+              className="font-Dorna text-center text-4xl text-MainColor flex flex-col max-md:hidden"
             >
               <motion.span whileHover={{ scale: 1.05 }}>
                 قصه خودتان را برای ما تعریف کنید

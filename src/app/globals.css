@@ -12,6 +12,7 @@ body {
   background-color: #1a1a1a;
   color: #fff;
   overflow-x: hidden;
+  padding: 2px;
   
 }
 
@@ -244,4 +245,13 @@ body {
   right: 0;
   z-index: 0;
    
+}
+
+@media (max-width: 768px) {
+  .cover-backGround::before{
+    display: none;
+  }
+  .cover-backGround2::before{
+    display: none;
+  }
 }
