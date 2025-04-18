@@ -27,21 +27,23 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isShowModal, setIsShowModal] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  console.log(product)
+
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  if (!isClient) return null; // حل مشکل SSR
+  if (!isClient) return null;
 
   return (
     <>
-      <Link href={`/Store/${product._id}`} className="block">
-        <div
-          className={`w-full h-96 bg-black relative overflow-hidden shadow-lg ${style.card}`}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+      {/* ❌ حذف <Link> از اطراف کل کارت — چون جلوگیری از ناوبری داخلی در دکمه‌ها ممکن نبود */}
+      <div
+        className={`w-full h-96 bg-black relative overflow-hidden shadow-lg ${style.card}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* ✅ فقط لینک دادن به بخش مورد نظر (مثلاً فقط عکس) */}
+        <Link href={`/Store/${product._id}`} className="block">
           <Image
             src={product.image || "/default-image.jpg"}
             alt={product.name}
@@ -50,68 +52,62 @@ const ProductCard: React.FC<Props> = ({ product }) => {
             className="w-full h-80 object-cover"
           />
 
-          {product.offer > 0 && (
-            <div className="absolute top-2 left-2 bg-black/30 rounded-full px-2 text-white">
-              % {product.offer}
-            </div>
-          )}
+        {product.offer > 0 && (
+          <div className="absolute top-2 left-2 bg-black/30 rounded-full px-2 text-white">
+            % {product.offer}
+          </div>
+        )}
+        </Link>
 
-          <div
-            className={`bg-black p-3 absolute w-full transition-all ${
-              isHovered ? style.FadeOut : style.FadeIn
-            }`}
-          >
-            <p className="text-md font-DM">{product.name}</p>
+        <div
+          className={`bg-black p-3 absolute w-full transition-all ${
+            isHovered ? style.FadeOut : style.FadeIn
+          }`}
+        >
+          <p className="text-md font-DM">{product.name}</p>
 
-            <div className="flex gap-1 items-center">
-              {product.offer > 0 ? (
-                <>
-                  <p className="font-DM line-through text-gray-600">
-                    {product.price.toLocaleString()} تومان
-                  </p>
-                  <p className="font-DB text-MainColor">
-                    {(
-                      product.price -
-                      (product.offer / 100) * product.price
-                    ).toLocaleString()}{" "}
-                    تومان
-                  </p>
-                </>
-              ) : (
-                <p className="font-DB text-MainColor">
+          <div className="flex gap-1 items-center">
+            {product.offer > 0 ? (
+              <>
+                <p className="font-DM line-through text-gray-600">
                   {product.price.toLocaleString()} تومان
                 </p>
-              )}
-            </div>
+                <p className="font-DB text-MainColor">
+                  {(
+                    product.price -
+                    (product.offer / 100) * product.price
+                  ).toLocaleString()}{" "}
+                  تومان
+                </p>
+              </>
+            ) : (
+              <p className="font-DB text-MainColor">
+                {product.price.toLocaleString()} تومان
+              </p>
+            )}
+          </div>
 
-            <div
-              className="flex mt-5 gap-3"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
+          {/* ✅ حذف onClick با stopPropagation و استفاده از دکمه‌های معمولی */}
+          <div className="flex mt-5 gap-3">
+            <ProductOrder
+              name={product.name}
+              price={product.price}
+              id={product._id}
+              image={product.image}
+              isCounter={false}
+            />
+
+            {/* ✅ دکمه‌ی نمایش مودال به جای دکمه‌ای داخل <Link> */}
+            <button
+              type="button"
+              onClick={() => setIsShowModal(true)}
+              role="button" // دسترسی‌پذیری بهتر
             >
-              <ProductOrder
-                name={product.name}
-                price={product.price}
-                id={product._id}
-                image={product.image}
-                isCounter={false}
-              />
-
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setIsShowModal(true);
-                }}
-              >
-                <SearchNormal size="24" color="#FF8A65" />
-              </button>
-            </div>
+              <SearchNormal size="24" color="#FF8A65" />
+            </button>
           </div>
         </div>
-      </Link>
+      </div>
 
       {isShowModal && (
         <InfoModal setIsShowModal={setIsShowModal} product={product} />

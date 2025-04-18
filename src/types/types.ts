@@ -65,3 +65,17 @@ export interface CommentType {
   __v:number;
 
 }
+
+
+export interface IFormInput {
+  firstName: string; // نام
+  lastName: string; // نام خانوادگی
+  email: string; // ایمیل
+  streetAdress: string; // آدرس خیابان
+  companyName?: string; // نام شرکت (اختیاری)
+  departemanAdress?: string; // آدرس دپارتمان (اختیاری)
+  city: string; // شهر
+  postCode: string; // کد پستی
+  phone: string; // شماره تلفن
+  
+}

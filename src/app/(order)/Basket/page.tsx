@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { BasketItem } from "@/types/types";
+import Link from "next/link";
 
 
 function Page() {
@@ -92,11 +93,11 @@ const decreaseQuantity = (productId: string) => {
       ...updatedBasket[index],
       quantity: updatedBasket[index].quantity - 1,
     };
+
     if(updatedBasket[index].quantity === 0 ) {
       return handleRemoveFromBasket(productId)
     }
 
-    console.log(updatedBasket)
     setBasket(updatedBasket);
     dispatch(updateBasket(updatedBasket));
   } else {
@@ -128,7 +129,8 @@ const getQuantity = (productId: string) => {
         </span>
         <span>ثبت سفارش</span>
       </div>
-      <div className="w-full grid grid-cols-3 gap-5">
+
+      <div className="w-full grid grid-cols-1 md:grid-cols-3  gap-5">
         <div className="col-span-2 w-full">
           <div className="w-full h-fit min-h-[500px]">
             <div className=" w-full">
@@ -206,9 +208,9 @@ const getQuantity = (productId: string) => {
               <p> مجموع</p>
               <p className="text-lg font-DB text-MainColor">{calculateTotalPrice()} تومان</p>
             </div>
-            <button className="w-full py-2 rounded-md bg-MainColor text-black">
+            <Link href={'/Basket/FinalizeBasket'} className="w-full text-center py-2 rounded-md bg-MainColor text-black">
               ثبت نهایی سفارش
-            </button>
+            </Link>
           </div>
           {/* offer code */}
           <div className="w-full flex  gap-2 border-2 border-gray-500 p-7 mt-5">
