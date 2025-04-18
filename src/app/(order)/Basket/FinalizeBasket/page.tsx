@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import InputFiled from "@/components/Modules/Basket/InputFiled"; // مسیرت درسته؟
-import { ArrowDown2 } from "iconsax-react";
-import { countries } from "@/utils/constances";
+import CountrySelection from "@/components/Modules/Basket/CountrySelection";
+import { ArrowLeft } from "iconsax-react";
+import OfferBox from "@/components/Modules/Basket/OfferBox";
 
 // ✅ تعریف Zod schema
 const schema = z.object({
@@ -21,39 +22,34 @@ const schema = z.object({
   phone: z.string().min(1, "شماره تلفن صورتحساب یک فیلد الزامی است."),
 });
 
-type countryType = {
-  name: string;
-  states: { name: string }[]; 
-};
-
 type FormValues = z.infer<typeof schema>;
 
+type countryType = {
+  name: string;
+  states: { name: string }[];
+};
+
+type BasketItem = {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+};
+
 function Page() {
-  const [isShowCountry, setIsShowCountry] = React.useState(false);
-  const [isShowState, setIsShowState] = React.useState(false);
-
   const [selectedCountry, setSelectedCountry] = React.useState<countryType>();
-
-  const [state, setState] = React.useState<string[]>([]);
   const [selectedState, setSelectedState] = React.useState<string>("");
-  const handleCountryClick = (countryName: string) => {
-     setState([])
-     setSelectedState("")
+  const [isShowOfferBox, setIsShowOfferBox] = React.useState(false);
 
+  const [basket, setBasket] = React.useState<BasketItem[]>([]);
 
-    const findCountry = countries.find(
-      (country) => country.name === countryName
-    );
-  
-    if (findCountry) {
-      setSelectedCountry(findCountry); // ⬅️ حالا مقدار درست رو ست می‌کنیم
-      setState(findCountry?.states.map(state => state.name) || []);
-    }
-  
+  useEffect(() => {
+    const getLocalstorage =  localStorage.getItem("basket");
+    const basket = getLocalstorage ? JSON.parse(getLocalstorage) : [];
+    setBasket(basket)
+  }, []);
 
-    console.log(state)
-    setIsShowCountry(false);
-  };
 
   const {
     register,
@@ -67,181 +63,193 @@ function Page() {
     console.log("فرم ارسال شد:", data);
   };
 
+
+
   return (
-    <div className="grid grid-cols-2 gap-5">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-full col-span-1 gap-4"
-      >
-        <div className="flex gap-5">
-          <InputFiled
-            name="firstName"
-            title="نام"
-            type="text"
-            register={register}
-            errors={errors}
-            required
-          />
-          <InputFiled
-            name="lastName"
-            title="نام خانوادگی"
-            type="text"
-            register={register}
-            errors={errors}
-            required
-          />
+    <>
+      <div className="flex items-center text-2xl text-DB py-10   text-gray-500 gap-2">
+        <span>سبد خرید</span>
+        <span>
+          <ArrowLeft />
+        </span>
+        <span className="text-white">تصفیه حساب</span>
+        <span>
+          <ArrowLeft />
+        </span>
+        <span>ثبت سفارش</span>
+      </div>
+
+      <div className="flex flex-col py-10 ">
+        <div className="flex ">
+          <p>کد تخفیف دارید؟</p>
+          <button
+            className="text-MainColor underline"
+            onClick={() => setIsShowOfferBox(!isShowOfferBox)}
+          >
+            برای نوشتن کد تخفیف اینجا کلیک کنید
+          </button>
         </div>
 
-        <InputFiled
-          name="companyName"
-          title="نام شرکت (اختیاری)"
-          type="text"
-          register={register}
-          errors={errors}
-          required={false}
-        />
-
-        <InputFiled
-          name="streetAdress"
-          title="آدرس خیابان"
-          type="text"
-          register={register}
-          errors={errors}
-          required={true}
-        />
-
-        <InputFiled
-          name="departemanAdress"
-          type="text"
-          placeHolder="اپارتمان, مجتمع , واحد ,  ... "
-          register={register}
-          errors={errors}
-          required={true}
-        />
-
-        <InputFiled
-          name="city"
-          title="شهر"
-          type="text"
-          register={register}
-          errors={errors}
-          required={true}
-        />
-        <InputFiled
-          name="postCode"
-          title="کد پستی"
-          type="text"
-          register={register}
-          errors={errors}
-          required={true}
-        />
-
-        <InputFiled
-          name="phone"
-          title="شماره تلفن"
-          type="text"
-          register={register}
-          errors={errors}
-          required={true}
-        />
-
-        <InputFiled
-          name="email"
-          title="ایمیل"
-          type="text"
-          register={register}
-          errors={errors}
-          required={true}
-        />
-        {/* select country */}
         <div
-          className="w-full relative  outline-none bg-transparent p-2 flex justify-between  border border-gray-600 rounded-full text-white cursor-pointer"
-          onClick={() => setIsShowCountry(!isShowCountry)}
+          className={`${
+            isShowOfferBox ? "block" : "hidden"
+          } animate-in fade-in duration-500`}
         >
-          <span>
-            {typeof selectedCountry === "string"
-              ? selectedCountry
-              : selectedCountry?.name || "انتخاب کنید"}
-          </span>
-          <span>
-            <ArrowDown2 />
-          </span>
-
-          <div
-            className={`absolute w-full bg-black top-12 left-0 z-50 rounded-xl px-5 ${
-              isShowCountry ? "absolute" : "hidden"
-            } `}
+          <OfferBox />
+        </div>
+      </div>
+      <div className="grid grid-cols-1  md:grid-cols-2  gap-10">
+        <div className=" col-span-1">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col w-full gap-4"
           >
-            <div className="w-full border-b border-gray-500 py-5">
-              <input
-                type="search"
-                placeholder="جستجو کنید"
-                className="w-full outline-none bg-transparent p-2 border border-gray-600 rounded-full text-white"
+            <div className="flex gap-5">
+              <InputFiled
+                name="firstName"
+                title="نام"
+                type="text"
+                register={register}
+                errors={errors}
+                required
+              />
+              <InputFiled
+                name="lastName"
+                title="نام خانوادگی"
+                type="text"
+                register={register}
+                errors={errors}
+                required
               />
             </div>
-            <div className={`overflow-auto max-h-44 `}>
-              {countries.map((country) => (
-                <div
-                  key={country.name}
-                  className="flex items-center gap-2 py-2 hover:bg-gray-800"
-                  onClick={() => handleCountryClick(country.name)}
-                >
-                  <span>{country.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
-        {/* select state */}
-        <div
-          className={`w-full relative  outline-none bg-transparent p-2  justify-between  border border-gray-600 rounded-full text-white cursor-pointer    ${
-            state.length ? "flex" : "hidden"
-          } `}
-          onClick={() => setIsShowState(!isShowState)}
-        >
-          <span>{selectedState || "شهر"}</span>
-          <span>
-            <ArrowDown2 />
-          </span>
+            <InputFiled
+              name="companyName"
+              title="نام شرکت (اختیاری)"
+              type="text"
+              register={register}
+              errors={errors}
+              required={false}
+            />
 
-          <div
-            className={`absolute w-full bg-black top-12 left-0 z-50 rounded-xl px-5 ${
-              isShowState ? "absolute" : "hidden"
-            }  `}
-          >
-            <div className="w-full border-b border-gray-500 py-5">
-              <input
-                type="search"
-                placeholder="جستجو کنید"
-                className="w-full outline-none bg-transparent p-2 border border-gray-600 rounded-full text-white"
+            <InputFiled
+              name="streetAdress"
+              title="آدرس خیابان"
+              type="text"
+              register={register}
+              errors={errors}
+              required={true}
+            />
+
+            <div className=" mt-5">
+              <InputFiled
+                name="departemanAdress"
+                type="text"
+                placeHolder="اپارتمان, مجتمع , واحد ,  ... "
+                register={register}
+                errors={errors}
+                required={true}
               />
             </div>
-            <div className={`overflow-auto max-h-44 `}>
-              {state.map((state) => (
-                <div
-                  key={state}
-                  className="flex items-center gap-2 py-2 hover:bg-gray-800"
-                  onClick={() => setSelectedState(state)}
-                >
-                  <span>{state}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+
+            <InputFiled
+              name="city"
+              title="شهر"
+              type="text"
+              register={register}
+              errors={errors}
+              required={true}
+            />
+            <InputFiled
+              name="postCode"
+              title="کد پستی"
+              type="text"
+              register={register}
+              errors={errors}
+              required={true}
+            />
+
+            <InputFiled
+              name="phone"
+              title="شماره تلفن"
+              type="text"
+              register={register}
+              errors={errors}
+              required={true}
+            />
+
+            <InputFiled
+              name="email"
+              title="ایمیل"
+              type="text"
+              register={register}
+              errors={errors}
+              required={true}
+            />
+
+            <CountrySelection
+              selectedCountry={selectedCountry}
+              selectedState={selectedState}
+              setSelectedCountry={setSelectedCountry}
+              setSelectedState={setSelectedState}
+            />
+            <button
+              type="submit"
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              ارسال فرم
+            </button>
+          </form>
         </div>
 
- 
-        <button
-          type="submit"
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-        >
-          ارسال فرم
-        </button>
-      </form>
+        <div className="col-span-1 ">
+           <div className="w-full h-fit p-5 flex flex-col gap-10 justify-center items-center bg-[#141414] sticky top-28">
+            <p className="text-2xl font-DBOLD">سفارش شما</p>
+            <div className="bg-[#0f0f0f] w-full h-fit p-5 flex flex-col gap-5">
+              <table>
+                <thead>
+                  <tr className="flex justify-between text-xl font-DBOLD border-b pb-5 mb-2">
+                    <td>محصول</td>
+                    <td>جمع جز</td>
+                  </tr>
+                </thead>
+                <tbody>
+                    {
+                      basket.map((item)=>(
+                        <tr key={item.id} className="flex mt-2 justify-between text-sm text-gray-500 font-DBOLD border-b border-b-gray-700 pb-2 mb-2">
+                        <td>{item.name} * {item.quantity} </td>
+                        <td>{(item.price * item.quantity).toLocaleString("fa-ir")} تومان</td>
+                      </tr>
+                      ))
+                    }
+                </tbody>
 
-      <div className="col-span-1">اینجا یه ستون جانبی هست</div>
-    </div>
+                <tfoot>
+                  <tr className="flex justify-between text-sm font-DBOLD  border-b border-gray-700 pb-2  mt-2">
+                     <td>جمع جزء</td>
+                     <td className="text-MainColor">{basket.reduce((acc, item) => acc + item.price * item.quantity, 0).toLocaleString("fa-ir")} تومان</td>
+                  </tr>
+
+                  <tr className="flex justify-between text-xl font-DBOLD  pt-5 mt-2">
+                     <td>جمع کل</td>
+                     <td className="text-MainColor">{basket.reduce((acc, item) => acc + item.price * item.quantity, 0).toLocaleString("fa-ir")} تومان</td>
+                  </tr>
+                </tfoot>
+
+              </table>
+                    
+
+            </div>
+            <div className="w-full h-full">
+              <button className="text-black bg-MainColor w-full py-3 rounded-lg font-DB  " >ثبت و پرداخت  </button>
+            </div>
+            <div className=" text-gray-500 border-t pt-5 ">
+            اطلاعات شخصی شما برای پردازش سفارش شما، پشتیبانی از تجربه شما در سراسر این وب سایت و برای اهدافی که در سیاست حفظ حریم خصوصی ذکر شده است استفاده می شود.
+            </div>
+           </div>
+        </div>
+      </div>
+    </>
   );
 }
 

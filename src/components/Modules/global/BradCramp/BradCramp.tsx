@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const breadcrumbLabels: Record<string, string> = {
   home: "خانه",
-  aboutus: "درباره ما",
+  Aboutus: "درباره ما",
   somepage: "برگه‌ای",
   contact: "تماس با ما",
   Regeister: "ثبت نام",
@@ -15,6 +15,7 @@ const breadcrumbLabels: Record<string, string> = {
   PAdmin: "پنل ادمین",
   Products: "محصولات",
   Comments: "کامنت ها",
+  
 };
 
 const Breadcrumbs = () => {

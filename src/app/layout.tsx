@@ -75,7 +75,7 @@ export default function RootLayout({
           ${bizan.variable}
           antialiased`}
         >
-          <LoadingScreen/>
+          {/* <LoadingScreen/> */}
           <IndexLayout>
             {children}
             </IndexLayout>
