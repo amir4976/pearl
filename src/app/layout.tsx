@@ -78,7 +78,7 @@ export default function RootLayout({
           <LoadingScreen/>
           <IndexLayout>
             {children}
-            </IndexLayout>
+          </IndexLayout>
         </body>
       </Providers>
     </html>
