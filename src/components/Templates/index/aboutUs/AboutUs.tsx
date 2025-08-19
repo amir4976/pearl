@@ -17,11 +17,11 @@ function AboutUs() {
         ی،
         <div className="flex justify-center mt-10">
           <Image
-            src="/cover/acb322876b4673f5d5be8a8d38df799a.jpg"
+            src="/cover/Asset 1.svg"
             alt="alt"
             width={400}
             height={600}
-            className=" rounded-3xl overflow-hidden"
+            className=" rounded-3xl overflow-hidden opacity-80 "
           />
         </div>
       </div>
@@ -36,11 +36,11 @@ function AboutUs() {
         ی،
                 <div className="flex justify-center mt-10">
           <Image
-            src="/cover/kateryna-hliznitsova-FjfqwnC04vQ-unsplash.jpg"
+            src="/cover/model1.svg"
             alt="alt"
             width={400}
             height={600}
-            className=" rounded-3xl overflow-hidden"
+            className=" rounded-3xl overflow-hidden  opacity-80 "
           />
         </div>
       </div>
