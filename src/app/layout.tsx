@@ -25,7 +25,7 @@ const Danaextra = localFont({
   src: "../../public/fonts/DanaFaNum-ExtraBold.woff",
   variable: "--font-dana-extra-Bold",
   weight: "100 900",
-});
+}); 
 const Danamed = localFont({
   src: "../../public/fonts/DanaFaNum-Medium.woff",
   variable: "--font-dana-med",
