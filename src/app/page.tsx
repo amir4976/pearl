@@ -5,7 +5,6 @@ import AboutUs from "@/components/Templates/index/aboutUs/AboutUs";
 import LastestProduct from "@/components/Templates/index/LastestProducts/LastestProduct";
 import InfiniteMarquee from "@/components/Templates/index/marquee/Marquee";
 import ScrollRevealText from "@/components/Modules/index/WhatWeDo/WhatWeDo";
-import CardsParallax from "@/components/Templates/index/CardsParallax/CardsParallax";
 import Testimonial from "@/components/Templates/index/testimonial/Testimonial";
 
 export default function Home() {
